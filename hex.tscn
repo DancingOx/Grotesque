@@ -23,7 +23,7 @@ func _ready():
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = PoolVector2Array( -2.5, 0, 2.5, 0, 5, 4, 5, 11, 2.5, 15, -2.5, 15, -5, 11, -5, 4 )
+points = PoolVector2Array( -2.5, 0, 2.5, 0, 5, 5.3, 5, 9.6, 2.5, 15, -2.5, 15, -5, 9.6, -5, 5.3 )
 
 [node name="control" type="Control"]
 
@@ -61,8 +61,8 @@ _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Visibility"
 
 [node name="collider" type="CollisionShape2D" parent="area" index="1"]
 
-position = Vector2( -1.5, -61.5714 )
-scale = Vector2( 25.25, 12.4762 )
+position = Vector2( -1.40071e-05, -14.2857 )
+scale = Vector2( 25.5625, 9.2381 )
 shape = SubResource( 2 )
 
 

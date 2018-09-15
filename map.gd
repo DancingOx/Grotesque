@@ -4,7 +4,7 @@ extends Control
 var hex_template = preload('res://hex.tscn')
 
 var x0 = -550
-var y0 = 525
+var y0 = 510
 
 var a = 256 / 2;
 #var h = a * cos(PI / 6.0);
@@ -87,7 +87,7 @@ func _process_moved():
 	moved.clear()
 	current.on_move()
 	pointer.visible = true
-	pointer.position = current.get_parent().rect_position - Vector2(2, 7)
+	pointer.position = current.get_parent().rect_position - Vector2(0, -38)
 
 func _process_clicked():
 	if not clicked:
