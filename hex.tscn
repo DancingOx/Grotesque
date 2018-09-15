@@ -1,10 +1,26 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://hexControl.gd" type="Script" id=1]
-[ext_resource path="res://hexArea.gd" type="Script" id=2]
-[ext_resource path="res://tileset/hex.png" type="Texture" id=3]
+[ext_resource path="res://hexArea.gd" type="Script" id=1]
+[ext_resource path="res://tileset/hex.png" type="Texture" id=2]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Control
+
+onready var map = self.get_parent().get_parent()
+
+func _ready():
+	pass
+	
+#func _input(event):
+#	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
+#		map.set_process(true)
+#
+#	if event is InputEventMouseMotion:
+#		map.set_process(true)
+"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
 points = PoolVector2Array( -2.5, 0, 2.5, 0, 5, 4, 5, 11, 2.5, 15, -2.5, 15, -5, 11, -5, 4 )
@@ -23,7 +39,8 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 1 )
+script = SubResource( 1 )
+_sections_unfolded = [ "Mouse" ]
 
 [node name="area" type="Area2D" parent="." index="0"]
 
@@ -34,18 +51,18 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="sprite" type="Sprite" parent="area" index="0"]
 
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Visibility", "Z Index" ]
 
 [node name="collider" type="CollisionShape2D" parent="area" index="1"]
 
 position = Vector2( -1.5, -61.5714 )
 scale = Vector2( 25.25, 12.4762 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 
