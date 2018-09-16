@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tile.png-a7e5bcf64b39b14a7dc84cb856087b43.stex"
+path="res://.import/coloring_cyan.png-883d514bb256da8baf6dd730edb2eda9.stex"
 
 [deps]
 
-source_file="res://tileset/tile.png"
-dest_files=[ "res://.import/tile.png-a7e5bcf64b39b14a7dc84cb856087b43.stex" ]
+source_file="res://resource/coloring_cyan.png"
+dest_files=[ "res://.import/coloring_cyan.png-883d514bb256da8baf6dd730edb2eda9.stex" ]
 
 [params]
 

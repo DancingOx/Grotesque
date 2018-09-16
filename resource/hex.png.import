@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dirtsand2.png-dd3e001baeacfd24550a1fca7dafc9ea.stex"
+path="res://.import/hex.png-593e6b37002eaaeb5f3dbdafa9ee1874.stex"
 
 [deps]
 
-source_file="res://tileset/dirtsand2.png"
-dest_files=[ "res://.import/dirtsand2.png-dd3e001baeacfd24550a1fca7dafc9ea.stex" ]
+source_file="res://resource/hex.png"
+dest_files=[ "res://.import/hex.png-593e6b37002eaaeb5f3dbdafa9ee1874.stex" ]
 
 [params]
 

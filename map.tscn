@@ -3,7 +3,8 @@
 [ext_resource path="res://map.gd" type="Script" id=1]
 [ext_resource path="res://background.gd" type="Script" id=2]
 [ext_resource path="res://tileSet.tres" type="TileSet" id=3]
-[ext_resource path="res://tileset/hex-2.png" type="Texture" id=4]
+[ext_resource path="res://resource/frame.png" type="Texture" id=4]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -20,11 +21,12 @@ margin_right = 40.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Mouse" ]
 
 [node name="background" type="Area2D" parent="." index="0"]
 
@@ -36,15 +38,18 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 2 )
+_sections_unfolded = [ "Collision" ]
 
 [node name="collider" type="CollisionShape2D" parent="background" index="0"]
 
 position = Vector2( 976.72, 971 )
+z_index = -1000
 shape = SubResource( 1 )
+_sections_unfolded = [ "Z Index" ]
 
 [node name="TileMap" type="TileMap" parent="background" index="1"]
 
-z_index = -1000
+z_index = -1001
 mode = 0
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 64, 64 )
@@ -64,20 +69,9 @@ format = 1
 tile_data = PoolIntArray( -327674, 0, 0, -327658, 0, 0, -196606, 0, 0, -196598, 0, 0, -196590, 0, 0, -196582, 0, 0, -2, 0, 0, -65531, 0, 0, -65530, 0, 0, -65522, 0, 0, -65514, 0, 0, -65506, 0, 0, 131066, 0, 0, 65538, 0, 0, 65546, 0, 0, 65554, 0, 0, 65562, 0, 0, 262134, 0, 0, 262142, 0, 0, 196614, 0, 0, 196622, 0, 0, 196630, 0, 0, 196638, 0, 0, 393210, 0, 0, 327682, 0, 0, 327690, 0, 0, 327698, 0, 0, 327706, 0, 0, 524286, 0, 0, 458758, 0, 0, 458766, 0, 0, 458774, 0, 0, 458782, 0, 0, 655354, 0, 0, 589826, 0, 0, 589834, 0, 0, 589842, 0, 0, 589850, 0, 0, 589858, 0, 0, 786430, 0, 0, 720902, 0, 0, 720910, 0, 0, 720918, 0, 0, 720926, 0, 0, 917498, 0, 0, 851970, 0, 0, 851978, 0, 0, 851986, 0, 0, 851994, 0, 0, 1048574, 0, 0, 983046, 0, 0, 983054, 0, 0, 983062, 0, 0, 983070, 0, 0, 1179642, 0, 0, 1114114, 0, 0, 1114122, 0, 0, 1114130, 0, 0, 1114138, 0, 0, 1310718, 0, 0, 1245190, 0, 0, 1245198, 0, 0, 1245206, 0, 0, 1376258, 0, 0, 1376266, 0, 0, 1376274, 0, 0, 1507334, 0, 0, 1507342, 0, 0, 1638410, 0, 0 )
 _sections_unfolded = [ "Z Index" ]
 
-[node name="hexes" type="Control" parent="." index="1"]
+[node name="hexes" type="Node2D" parent="." index="1"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+_sections_unfolded = [ "Mouse" ]
 
 [node name="pointer" type="Sprite" parent="." index="2"]
 

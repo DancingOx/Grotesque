@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hex.png-4c2da4cbd1a4859009151a3d305e4ec8.stex"
+path="res://.import/tile.png-774ca7361d266b7b31052486caee2cc4.stex"
 
 [deps]
 
-source_file="res://tileset/hex.png"
-dest_files=[ "res://.import/hex.png-4c2da4cbd1a4859009151a3d305e4ec8.stex" ]
+source_file="res://resource/tile.png"
+dest_files=[ "res://.import/tile.png-774ca7361d266b7b31052486caee2cc4.stex" ]
 
 [params]
 

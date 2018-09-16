@@ -1,13 +1,11 @@
 extends Control
 
-
 var hex_template = preload('res://hex.tscn')
 
 var x0 = -550
 var y0 = 510
 
 var a = 256 / 2;
-#var h = a * cos(PI / 6.0);
 var h = 55;
 
 var order = 5
@@ -20,7 +18,9 @@ var min_sum = side - order;
 var max_sum = 2 * side - order;
 
 var moved = []
+var process_move = false
 var clicked = []
+var process_click = false
 
 onready var hexes = get_node("hexes")
 onready var pointer = get_node('pointer')
@@ -47,7 +47,7 @@ func _fill():
 	for cell in cells:
 		if not map[cell]:
 			continue
-		
+
 		var i = cell[0]
 		var j = cell[1]
 
@@ -56,23 +56,30 @@ func _fill():
 		
 		var hex = hex_template.instance()
 		
-		hex.rect_position = Vector2(x0 + float(s) * 1.5 * a, y0 + float(d) * h)
+		hex.set_position(Vector2(x0 + float(s) * 1.5 * a, y0 + float(d) * h))
 
-		var sprite = hex.get_node('area')
-		sprite.z_index = d
-		sprite.i = i
-		sprite.j = j
+		hex.z_index = d
+		hex.i = i
+		hex.j = j
 		
 		hexes.add_child(hex)
 
 func _ready():
 	set_process(false)
-	
+
 	_init_cells()
 	_generate()
 	_fill()
-		
+
 	print('MAP READY')
+
+func set_process_move():
+	process_move = true
+	set_process(true)
+
+func set_process_click():
+	process_click = true
+	set_process(true)
 
 func _process_moved():
 	if not moved:
@@ -85,9 +92,9 @@ func _process_moved():
 			current = hex
 
 	moved.clear()
+	process_move = false
+
 	current.on_move()
-	pointer.visible = true
-	pointer.position = current.get_parent().rect_position - Vector2(0, -38)
 
 func _process_clicked():
 	if not clicked:
@@ -98,12 +105,16 @@ func _process_clicked():
 		if hex.z_index > current.z_index:
 			current = hex
 
-	pointer.visible = true
 	clicked.clear()
+	process_click = false
+
 	current.on_click()
 
 func _process(delta):
 	set_process(false)
 
-	_process_moved()
-	_process_clicked()
+	if process_move:
+		_process_moved()
+
+	if process_click:
+		_process_clicked()

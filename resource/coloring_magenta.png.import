@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hex-2.png-0b0665eb736464a4c59d96a797240d77.stex"
+path="res://.import/coloring_magenta.png-0f715eb05e18974d2e5c2d0132039366.stex"
 
 [deps]
 
-source_file="res://tileset/hex-2.png"
-dest_files=[ "res://.import/hex-2.png-0b0665eb736464a4c59d96a797240d77.stex" ]
+source_file="res://resource/coloring_magenta.png"
+dest_files=[ "res://.import/coloring_magenta.png-0f715eb05e18974d2e5c2d0132039366.stex" ]
 
 [params]
 
