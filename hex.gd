@@ -1,6 +1,7 @@
 extends Area2D
 
 var hex_texture_cyan = preload('res://resource/coloring_cyan.png')
+var hex_texture_stripes = preload('res://resource/coloring_stripes.png')
 
 
 var index
@@ -10,8 +11,7 @@ onready var coloring = get_node("coloring")
 
 func _ready():
 	pass
-	#print(self.get_path())
-	
+
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		map.clicked.append(self)
@@ -30,5 +30,6 @@ func on_left_click():
 
 func on_right_click():
 	map.take_off_unit(index)
-	
-	#coloring.texture = hex_texture_cyan
+
+func show_captured():
+	coloring.texture = hex_texture_stripes

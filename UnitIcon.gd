@@ -24,4 +24,3 @@ func set_placed(placed):
 	else:
 		button.texture_normal = tex_free_unchecked
 		button.texture_pressed = tex_free_checked
-		
