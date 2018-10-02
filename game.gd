@@ -11,7 +11,7 @@ var player
 func _ready():
 	map = map_template.instance()
 
-	var scene = get_node("/root/main/game/scene")
+	var scene = get_node("/root/main/game/scene/viewport")
 	scene.add_child(map)
 	
 	player = player_template.instance()

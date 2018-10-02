@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
-[ext_resource path="res://GUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://CameraMovement.gd" type="Script" id=2]
+[ext_resource path="res://GUI.tscn" type="PackedScene" id=3]
 
-[node name="main" type="Control" index="0"]
+[node name="main" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -22,11 +23,84 @@ _sections_unfolded = [ "Mouse", "Rendering" ]
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
 
-[node name="scene" type="Node2D" parent="game" index="0"]
+[node name="scene" type="ViewportContainer" parent="game" index="0"]
 
-_sections_unfolded = [ "Mouse" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+stretch = false
+stretch_shrink = 1
+_sections_unfolded = [ "Rect" ]
 
-[node name="GUI" parent="." index="1" instance=ExtResource( 2 )]
+[node name="viewport" type="Viewport" parent="game/scene" index="0"]
+
+arvr = false
+size = Vector2( 1920, 1080 )
+own_world = false
+world = null
+transparent_bg = false
+msaa = 0
+hdr = true
+disable_3d = true
+usage = 0
+debug_draw = 0
+render_target_v_flip = false
+render_target_clear_mode = 0
+render_target_update_mode = 3
+audio_listener_enable_2d = false
+audio_listener_enable_3d = false
+physics_object_picking = false
+gui_disable_input = false
+gui_snap_controls_to_pixels = true
+shadow_atlas_size = 0
+shadow_atlas_quad_0 = 2
+shadow_atlas_quad_1 = 2
+shadow_atlas_quad_2 = 3
+shadow_atlas_quad_3 = 4
+_sections_unfolded = [ "Audio Listener", "GUI", "Mouse", "Render Target", "Rendering" ]
+
+[node name="camera" type="Camera2D" parent="game/scene/viewport" index="0"]
+
+anchor_mode = 0
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+script = ExtResource( 2 )
+panSpeed = 10.0
+speed = 10.0
+zoomspeed = 10.0
+zoommargin = 0.1
+zoomMin = 0.25
+zoomMax = 3.0
+marginX = 0.0
+marginY = 0.0
+
+[node name="GUI" parent="." index="1" instance=ExtResource( 3 )]
 
 mouse_filter = 2
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "custom_constants" ]
