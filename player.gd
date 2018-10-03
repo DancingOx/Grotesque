@@ -1,7 +1,7 @@
 extends Control
 
 onready var game = get_node('/root/main/game')
-onready var gui = get_node('/root/main/GUI')
+onready var gui = get_node('/root/main/canvas/GUI')
 
 var drone_template = preload('res://drone.tscn')
 

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var map_template = preload('res://map.tscn')
 var player_template = preload('res://player.tscn')
@@ -11,7 +11,7 @@ var player
 func _ready():
 	map = map_template.instance()
 
-	var scene = get_node("/root/main/game/scene/viewport")
+	var scene = get_node("/root/main/game/scene")
 	scene.add_child(map)
 	
 	player = player_template.instance()

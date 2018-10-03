@@ -19,7 +19,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
-_sections_unfolded = [ "Size Flags", "Theme", "Visibility" ]
+_sections_unfolded = [ "Mouse", "Size Flags", "Theme", "Visibility" ]
 
 [node name="Button" type="TextureButton" parent="." index="0"]
 
@@ -44,7 +44,7 @@ group = null
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 stretch_mode = 4
-_sections_unfolded = [ "Size Flags", "Textures" ]
+_sections_unfolded = [ "Mouse", "Size Flags", "Textures" ]
 
 [connection signal="button_down" from="Button" to="." method="_on_TextureButton_button_down"]
 

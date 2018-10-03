@@ -1,6 +1,6 @@
 extends Control
 
-onready var gui = get_node('/root/main/GUI')
+onready var gui = get_node('/root/main/canvas/GUI')
 
 var hex_template = preload('res://hex.tscn')
 
