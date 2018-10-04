@@ -9,19 +9,17 @@ var map
 var player
 
 func _ready():
-	map = map_template.instance()
-
-	var scene = get_node("/root/main/game/scene")
-	scene.add_child(map)
-	
 	player = player_template.instance()
 	self.add_child(player)
+	
+	var scene = get_node("/root/main/game/scene")
+	map = map_template.instance()
+	scene.add_child(map)
 	
 	print('GAME READY')
 	
 	set_process(true)
-	
-	
+
 func _input(event):
 	if event is InputEventKey:
 		if event.scancode == KEY_K and not event.echo:
@@ -33,6 +31,4 @@ func _process(delta):
 
 func apply_turn():
 	for cell in map.units_placement:
-		if not player.cells.has(cell):
-			player.cells.append(cell)
-			map.nodes[cell].show_captured()
+		map.capture_cell(cell, player)

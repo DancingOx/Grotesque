@@ -71,12 +71,25 @@ func _fill():
 
 		nodes[cell] = hex
 
+func get_random_cell():
+	while true:
+		var cell = cells[randi() % cells.size()]
+		if map[cell] != 0:
+			return cell
+
+func _set_random_starting_cell():
+	var cell = get_random_cell()
+	var player = get_node('/root/main/game').player
+	capture_cell(cell, player)
+
 func _ready():
 	set_process(false)
 
 	_init_cells()
 	_generate()
 	_fill()
+	
+	_set_random_starting_cell()
 
 	print('MAP READY')
 
@@ -168,3 +181,9 @@ func take_off_unit(index):
 	current_location.remove_child(unit)
 
 	gui.find_icon_by_unit(unit).set_placed(false)
+
+func capture_cell(cell, player):
+	if not player.cells.has(cell):
+		player.cells.append(cell)
+		nodes[cell].show_captured()
+	
