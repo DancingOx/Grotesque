@@ -93,6 +93,33 @@ func _ready():
 
 	print('MAP READY')
 
+func get_neighbor_cells(cell):
+	var i = cell[0]
+	var j = cell[1]
+
+	var neighbors = []
+
+	for d in [[1, 0], [0, 1], [-1, 0], [0, -1], [1, -1], [-1, 1]]:
+		var di = d[0]
+		var dj = d[1]
+		var neighbor_cell = [i + di, j + dj]
+		if neighbor_cell in cells:
+			neighbors.append(neighbor_cell)
+
+	return neighbors
+
+func get_cells_to_place_unit(player):
+	var cells_to_expand = []
+
+	cells_to_expand += player.cells
+
+	for cell in player.cells:
+		for neighbor_cell in get_neighbor_cells(cell):
+			if not neighbor_cell in cells_to_expand:
+				cells_to_expand.append(neighbor_cell)
+
+	return cells_to_expand
+
 func set_process_move():
 	process_move = true
 	set_process(true)
@@ -151,6 +178,10 @@ func place_unit(index):
 
 	if units_placement.has(index):
 		return  # cell is already occupied
+
+	var player = get_node('/root/main/game').player
+	if not index in get_cells_to_place_unit(player):
+		return  # cell is unreachable
 
 	var unit = icon.unit
 
