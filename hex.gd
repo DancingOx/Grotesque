@@ -27,10 +27,10 @@ func on_move():
 	map.pointer.set_position(self.position - Vector2(0, -35))
 
 func on_left_click():
-	map.place_unit(index)
+	map.place_selected_unit(index)
 
 func on_right_click():
-	map.take_off_unit(index)
+	pass
 
 func show_captured():
 	particles.emitting = true

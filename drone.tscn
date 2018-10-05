@@ -48,7 +48,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angular Velocity", "Color", "Damping", "Emission Shape", "Gravity", "Initial Velocity", "Linear Accel", "Scale" ]
 
-[node name="Area2D" type="Area2D" index="0"]
+[node name="Area2D" type="Area2D"]
 
 position = Vector2( 0, 10 )
 input_pickable = true

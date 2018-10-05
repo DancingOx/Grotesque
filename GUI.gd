@@ -27,7 +27,10 @@ func find_icon_by_unit(unit):
 			return icon
 
 func set_unit_selected(unit):
-	get_selected_unit_icon().get_node('Button').set('pressed', false)
+	var selected_icon = get_selected_unit_icon()
+	if selected_icon:
+		selected_icon.get_node('Button').set('pressed', false)
+
 	find_icon_by_unit(unit).get_node('Button').set('pressed', true)
 
 func _on_ButtonNextTurn_pressed():

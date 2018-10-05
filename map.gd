@@ -77,10 +77,24 @@ func get_random_cell():
 		if map[cell] != 0:
 			return cell
 
-func _set_random_starting_cell():
-	var cell = get_random_cell()
-	var player = get_node('/root/main/game').player
-	capture_cell(cell, player)
+func _set_random_starting_position(player):
+	var starting_cells
+	while true:
+		starting_cells = []
+
+		var cell = get_random_cell()
+		starting_cells.append(cell)
+
+		for neighbor_cell in get_random_neighbor_cells(cell, 2):
+			starting_cells.append(neighbor_cell)
+
+		if starting_cells.size() == 3:
+			break
+
+	for cell in starting_cells:
+		capture_cell(cell, player)
+		var unit = player.create_unit()
+		place_unit(unit, cell)
 
 func _ready():
 	set_process(false)
@@ -89,7 +103,8 @@ func _ready():
 	_generate()
 	_fill()
 	
-	_set_random_starting_cell()
+	var player = get_node('/root/main/game').player
+	_set_random_starting_position(player)
 
 	print('MAP READY')
 
@@ -107,6 +122,18 @@ func get_neighbor_cells(cell):
 			neighbors.append(neighbor_cell)
 
 	return neighbors
+
+func get_random_neighbor_cells(cell, count):
+	var neighbors = get_neighbor_cells(cell)
+	var selected = []
+	for x in range(count):
+		if neighbors:
+			var pos = randi() % neighbors.size()
+			var index = neighbors[pos]
+			if map[index]:
+				selected.append(index)
+				neighbors.remove(pos)
+	return selected
 
 func get_cells_to_place_unit(player):
 	var cells_to_expand = []
@@ -171,19 +198,22 @@ func _process(delta):
 		_process_clicked()
 
 
-func place_unit(index):
+func place_selected_unit(index):
 	var icon = gui.get_selected_unit_icon()
 	if not icon:
 		return  # no unit selected
 
+	place_unit(icon.unit, index)
+
+	icon.set_placed(true)
+
+func place_unit(unit, index):
 	if units_placement.has(index):
 		return  # cell is already occupied
 
 	var player = get_node('/root/main/game').player
 	if not index in get_cells_to_place_unit(player):
 		return  # cell is unreachable
-
-	var unit = icon.unit
 
 	var current_location = unit.get_parent()
 	if current_location:
@@ -194,9 +224,7 @@ func place_unit(index):
 
 	nodes[index].add_child(unit)
 
-	icon.set_placed(true)
-
-func take_off_unit(index):
+func take_off_selected_unit(index):
 	if not units_placement.has(index):
 		return  # cell is already free
 

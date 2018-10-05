@@ -10,10 +10,9 @@ var cells = []
 var units = []
 
 func _ready():
-	for i in range(7):
-		add_figure()
+	pass
 
-func add_figure():
+func create_unit():
 	var unit = drone_template.instance()
 	units.append(unit)
 
@@ -21,3 +20,4 @@ func add_figure():
 	
 	gui.add_unit_icon(unit)
 	
+	return unit
