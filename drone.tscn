@@ -1,14 +1,54 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://drone.gd" type="Script" id=1]
-[ext_resource path="res://resource/drone.png" type="Texture" id=2]
+[ext_resource path="res://resource/fire_particle.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Area2D" type="Area2D"]
+[sub_resource type="ParticlesMaterial" id=2]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 7.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, -30, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 0.03
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 50.0
+linear_accel_random = 1.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 2.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 0.8
+scale_random = 0.3
+color = Color( 0, 1, 0.953125, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angular Velocity", "Color", "Damping", "Emission Shape", "Gravity", "Initial Velocity", "Linear Accel", "Scale" ]
+
+[node name="Area2D" type="Area2D" index="0"]
 
 position = Vector2( 0, 10 )
 input_pickable = true
@@ -21,14 +61,34 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
-position = Vector2( 0.52108, -5.86933 )
-scale = Vector2( 3.84574, 2.87854 )
+position = Vector2( 0.820695, -20.0509 )
+scale = Vector2( 3.50031, 4.4751 )
 shape = SubResource( 1 )
+
+[node name="particles" type="Particles2D" parent="." index="1"]
+
+position = Vector2( 1.56903, -18.348 )
+scale = Vector2( 1.35722, 1.42662 )
+emitting = true
+amount = 32
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 2 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Textures" ]
 
 

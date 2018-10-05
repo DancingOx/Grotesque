@@ -8,6 +8,7 @@ var index
 
 onready var map = self.get_parent().get_parent()
 onready var coloring = get_node("coloring")
+onready var particles = get_node("particles")
 
 func _ready():
 	pass
@@ -32,4 +33,6 @@ func on_right_click():
 	map.take_off_unit(index)
 
 func show_captured():
-	coloring.texture = hex_texture_stripes
+	particles.emitting = true
+	
+	#coloring.texture = hex_texture_stripes
