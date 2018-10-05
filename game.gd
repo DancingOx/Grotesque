@@ -32,3 +32,8 @@ func _process(delta):
 func apply_turn():
 	for cell in map.units_placement:
 		map.capture_cell(cell, player)
+	
+	for cell in map.nodes:
+		map.nodes[cell].remove_highlight()
+	
+	map.highlight_border_cells(player)

@@ -106,6 +106,8 @@ func _ready():
 	var player = get_node('/root/main/game').player
 	_set_random_starting_position(player)
 
+	highlight_border_cells(player)
+
 	print('MAP READY')
 
 func get_neighbor_cells(cell):
@@ -146,6 +148,18 @@ func get_cells_to_place_unit(player):
 				cells_to_expand.append(neighbor_cell)
 
 	return cells_to_expand
+
+func highlight_border_cells(player):
+	var border_cells = []
+	
+	for cell in player.cells:
+		for neighbor_cell in get_neighbor_cells(cell):
+			if not neighbor_cell in border_cells and not neighbor_cell in player.cells:
+				border_cells.append(neighbor_cell)
+	
+	for cell in border_cells:
+		if cell in nodes:
+			nodes[cell].highlight_move_possible()
 
 func set_process_move():
 	process_move = true

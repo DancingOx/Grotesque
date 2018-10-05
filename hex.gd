@@ -34,5 +34,9 @@ func on_right_click():
 
 func show_captured():
 	particles.emitting = true
-	
-	#coloring.texture = hex_texture_stripes
+
+func highlight_move_possible():
+	coloring.texture = hex_texture_stripes
+
+func remove_highlight():
+	coloring.texture = null
