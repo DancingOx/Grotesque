@@ -6,12 +6,16 @@ var hex_texture_stripes = preload('res://resource/coloring_stripes.png')
 var index
 var player
 
+var income
+
 onready var map = self.get_parent().get_parent()
 onready var coloring = get_node("coloring")
 
 
 func _ready():
-	pass
+	income = 10 + 5 * (randi() % 5)
+	get_node('income').text = str(income)
+	get_node('income').set("custom_colors/font_color", Color(0.3 + 0.03 * income, 0.7, 0.2, 1.0))
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

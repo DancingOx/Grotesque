@@ -43,3 +43,5 @@ func unselect_all_units():
 func _on_ButtonNextTurn_pressed():
 	game.next_phase()
 
+func update_wealth_indicator(wealth):
+	get_node('MarginContainer/VBoxContainer/TopPanel/Left/WealthIndicator').text = str(wealth)

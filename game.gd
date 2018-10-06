@@ -77,6 +77,9 @@ func to_plan_phase():
 	for unit in opponent.units:
 		unit.hide()
 
+	human.apply_income()
+	opponent.apply_income()
+
 	for player in map.units_placement:
 		for cell in map.units_placement[player]:
 			map.capture_cell(cell, player)
@@ -93,6 +96,5 @@ func set_units_unpickable(value):
 
 func make_random_moves(player):
 	var cells = map.get_random_border_cells(player, player.units.size())
-	
 	for i in range(cells.size()):
 		map.place_unit(player.units[i], cells[i])

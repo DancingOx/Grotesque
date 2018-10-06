@@ -14,8 +14,12 @@ var cells = []
 
 var units = []
 
+var wealth
+
 func _ready():
-	pass
+	wealth = 100
+	if role == 'human':
+		gui.update_wealth_indicator(wealth)
 
 func create_unit():
 	var unit = drone_template.instance()
@@ -32,3 +36,10 @@ func create_unit():
 	unit.get_node('particles').process_material = units_material
 	
 	return unit
+
+func apply_income():
+	for cell in cells:
+		wealth += game.map.nodes[cell].income
+
+	if role == 'human':
+		gui.update_wealth_indicator(wealth)
