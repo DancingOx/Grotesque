@@ -31,7 +31,7 @@ onready var pointer = get_node('pointer')
 var map = {}
 var cells = []
 var nodes = {}
-
+var posession = {}
 var units_placement = {}
 
 func _init_cells():
@@ -74,10 +74,12 @@ func _fill():
 func get_random_cell():
 	while true:
 		var cell = cells[randi() % cells.size()]
-		if map[cell] != 0:
+		if map[cell] != 0 and not cell in posession:
 			return cell
 
 func _set_random_starting_position(player):
+	units_placement[player] = {}
+	
 	var starting_cells
 	while true:
 		starting_cells = []
@@ -103,10 +105,13 @@ func _ready():
 	_generate()
 	_fill()
 	
-	var player = get_node('/root/main/game').player
+	var player = get_node('/root/main/game').human
 	_set_random_starting_position(player)
 
 	highlight_border_cells(player)
+
+	var opponent = get_node('/root/main/game').opponent
+	_set_random_starting_position(opponent)
 
 	print('MAP READY')
 
@@ -132,7 +137,7 @@ func get_random_neighbor_cells(cell, count):
 		if neighbors:
 			var pos = randi() % neighbors.size()
 			var index = neighbors[pos]
-			if map[index]:
+			if map[index] and not index in posession:
 				selected.append(index)
 				neighbors.remove(pos)
 	return selected
@@ -149,17 +154,19 @@ func get_cells_to_place_unit(player):
 
 	return cells_to_expand
 
-func highlight_border_cells(player):
+func get_border_cells(player):
 	var border_cells = []
 	
 	for cell in player.cells:
 		for neighbor_cell in get_neighbor_cells(cell):
-			if not neighbor_cell in border_cells and not neighbor_cell in player.cells:
+			if not neighbor_cell in border_cells and not neighbor_cell in player.cells and neighbor_cell in nodes:
 				border_cells.append(neighbor_cell)
-	
-	for cell in border_cells:
-		if cell in nodes:
-			nodes[cell].highlight_move_possible()
+
+	return border_cells
+
+func highlight_border_cells(player):
+	for cell in get_border_cells(player):
+		nodes[cell].highlight_move_possible()
 
 func set_process_move():
 	process_move = true
@@ -222,41 +229,42 @@ func place_selected_unit(index):
 	icon.set_placed(true)
 
 func place_unit(unit, index):
-	if units_placement.has(index):
-		return  # cell is already occupied
+	if units_placement[unit.player].has(index):
+		var current_unit = units_placement[unit.player][index]
+		if current_unit.player == unit.player:
+			return  # cell is already occupied
 
-	var player = get_node('/root/main/game').player
+	var player = unit.player
 	if not index in get_cells_to_place_unit(player):
 		return  # cell is unreachable
 
-	var current_location = unit.get_parent()
-	if current_location:
-		current_location.remove_child(unit)
-		units_placement.erase(current_location.index)
+	var current_hex = unit.get_parent()
+	if current_hex:
+		units_placement[unit.player].erase(current_hex.index)
+		current_hex.remove_child(unit)
 
-	units_placement[index] = unit
+	units_placement[unit.player][index] = unit
 
 	nodes[index].add_child(unit)
-
-func take_off_selected_unit(index):
-	if not units_placement.has(index):
-		return  # cell is already free
-
-	var unit = units_placement[index]
-
-	var current_location = nodes[index]
-	if not current_location:
-		print('Unit location inconsistency')
-		return
-		
-	units_placement.erase(index)
-	
-	current_location.remove_child(unit)
-
-	gui.find_icon_by_unit(unit).set_placed(false)
 
 func capture_cell(cell, player):
 	if not player.cells.has(cell):
 		player.cells.append(cell)
-		nodes[cell].show_captured()
+		var hex = nodes[cell]
+		if hex.player:
+			hex.player.cells.erase(cell)
+		hex.player = player
+		hex.show_captured()
+		posession[cell] = player
+
+func get_random_border_cells(player, count):
+	var border_cells = get_border_cells(player)
 	
+	var selected = []
+
+	while border_cells and selected.size() < count:
+		var pos = randi() % border_cells.size()
+		selected.append(border_cells[pos])
+		border_cells.remove(pos)
+	
+	return selected

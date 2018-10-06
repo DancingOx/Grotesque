@@ -5,6 +5,11 @@ onready var gui = get_node('/root/main/canvas/GUI')
 
 var drone_template = preload('res://drone.tscn')
 
+var role
+var color
+var particles_material
+var units_material
+
 var cells = []
 
 var units = []
@@ -18,6 +23,12 @@ func create_unit():
 
 	unit.z_index = 2000
 	
-	gui.add_unit_icon(unit)
+	if role == 'human':
+		gui.add_unit_icon(unit)
+	else:
+		unit.hide()
+
+	unit.player = self
+	unit.get_node('particles').process_material = units_material
 	
 	return unit

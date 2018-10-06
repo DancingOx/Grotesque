@@ -3,12 +3,12 @@ extends Area2D
 var hex_texture_cyan = preload('res://resource/coloring_cyan.png')
 var hex_texture_stripes = preload('res://resource/coloring_stripes.png')
 
-
 var index
+var player
 
 onready var map = self.get_parent().get_parent()
 onready var coloring = get_node("coloring")
-onready var particles = get_node("particles")
+
 
 func _ready():
 	pass
@@ -33,6 +33,8 @@ func on_right_click():
 	pass
 
 func show_captured():
+	var particles = get_node("particles")
+	particles.process_material = player.particles_material
 	particles.emitting = true
 
 func highlight_move_possible():
