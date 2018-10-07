@@ -15,7 +15,7 @@ func _ready():
 	human = player_template.instance()
 	human.role = 'human'
 	human.color = Color(0.0, 0.9, 0.9, 0.5)
-	human.particles_material = load('res://crosses_material.tres')
+	human.particles_material = load('res://crosses_material_blue.tres')
 	human.units_material = load('res://fire_material_blue.tres')
 	human.egg_texture = preload('res://resource/egg.png')
 	human.mox_texture = preload('res://resource/mox_blue.png')
@@ -24,7 +24,7 @@ func _ready():
 	opponent = player_template.instance()
 	opponent.role = 'ai'
 	opponent.color = Color(0.0, 0.9, 0.0, 0.5)
-	opponent.particles_material = load('res://crosses_material2.tres')
+	opponent.particles_material = load('res://crosses_material_green.tres')
 	opponent.units_material = load('res://fire_material_green.tres')
 	opponent.egg_texture = preload('res://resource/egg_green.png')
 	opponent.mox_texture = preload('res://resource/mox_green.png')
