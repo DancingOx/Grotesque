@@ -3,6 +3,7 @@ extends Control
 onready var gui = get_node('/root/main/canvas/GUI')
 
 var hex_template = preload('res://hex.tscn')
+var egg_template = preload('res://egg.tscn')
 
 var x0 = -550
 var y0 = 510
@@ -33,6 +34,7 @@ var cells = []
 var nodes = {}
 var posession = {}
 var units_placement = {}
+var eggs_placement = {}
 
 func _init_cells():
 	for i in range(side):
@@ -79,6 +81,7 @@ func get_random_cell():
 
 func _set_random_starting_position(player):
 	units_placement[player] = {}
+	eggs_placement[player] = {}
 	
 	var starting_cells
 	while true:
@@ -108,10 +111,10 @@ func _ready():
 	var player = get_node('/root/main/game').human
 	_set_random_starting_position(player)
 
-	highlight_border_cells(player)
-
 	var opponent = get_node('/root/main/game').opponent
 	_set_random_starting_position(opponent)
+
+	highlight_border_cells(player)
 
 	print('MAP READY')
 
@@ -218,7 +221,6 @@ func _process(delta):
 	if process_click:
 		_process_clicked()
 
-
 func place_selected_unit(index):
 	var icon = gui.get_selected_unit_icon()
 	if not icon:
@@ -229,12 +231,14 @@ func place_selected_unit(index):
 	icon.set_placed(true)
 
 func place_unit(unit, index):
-	if units_placement[unit.player].has(index):
-		var current_unit = units_placement[unit.player][index]
-		if current_unit.player == unit.player:
-			return  # cell is already occupied
-
 	var player = unit.player
+
+	if units_placement[player].has(index):
+		return  # cell is already occupied by another unit
+
+	if eggs_placement[player].has(index):
+		return  # cell is already occupied by egg
+
 	if not index in get_cells_to_place_unit(player):
 		return  # cell is unreachable
 
@@ -268,3 +272,40 @@ func get_random_border_cells(player, count):
 		border_cells.remove(pos)
 	
 	return selected
+
+func smash_egg(index):
+	var player = posession[index]
+	eggs_placement[player][index].queue_free()
+	eggs_placement[player].erase(index)
+
+func hatch_egg(index):
+	smash_egg(index)
+	var player = posession[index]
+	var unit = player.create_unit()
+	place_unit(unit, index)
+	
+func get_random_free_cell(player):
+	var free_cells = []
+	for cell in player.cells:
+		if cell in units_placement[player]:
+			continue
+		if cell in eggs_placement[player]:
+			continue
+		
+		free_cells.append(cell)
+	
+	if not free_cells:
+		return null
+	
+	return free_cells[randi() % free_cells.size()]
+
+func place_new_egg(index):
+	var player = posession[index]
+	if not player:
+		return
+	
+	var new_egg = egg_template.instance()
+	new_egg.get_node('Sprite').set('texture', player.egg_texture)
+	nodes[index].add_child(new_egg)
+	eggs_placement[player][index] = new_egg
+

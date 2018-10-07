@@ -9,6 +9,7 @@ var role
 var color
 var particles_material
 var units_material
+var egg_texture
 
 var cells = []
 
@@ -43,3 +44,15 @@ func apply_income():
 
 	if role == 'human':
 		gui.update_wealth_indicator(wealth)
+
+const unit_cost = 300
+
+func pay_for_new_unit():
+	if wealth < unit_cost:
+		return false
+	
+	wealth -= unit_cost
+	
+	gui.update_wealth_indicator(wealth)
+
+	return true

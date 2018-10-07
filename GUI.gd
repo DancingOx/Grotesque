@@ -45,3 +45,58 @@ func _on_ButtonNextTurn_pressed():
 
 func update_wealth_indicator(wealth):
 	get_node('MarginContainer/VBoxContainer/TopPanel/Left/WealthIndicator').text = str(wealth)
+
+var egg = null
+var egg_hex = null
+
+func activate_egg_placing_mode():
+	if not game.human.pay_for_new_unit():
+		return
+	
+	enable_unit_selection(false)
+	egg = load('res://egg.tscn').instance()
+	
+	return true
+
+func deactivate_egg_placing_mode():
+	if egg:
+		egg.queue_free()
+		egg = null
+		egg_hex = null
+
+	enable_unit_selection(true)
+
+func move_egg(hex):
+	if not egg:
+		return
+
+	if hex == egg_hex:
+		return
+
+	if egg_hex:
+		egg_hex.remove_child(egg)
+
+	hex.add_child(egg)
+	egg_hex = hex
+
+func place_egg(hex):
+	if hex != egg_hex:
+		move_egg(hex)
+
+	game.map.eggs_placement[hex.player][hex.index] = egg
+
+	get_node('MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/AddUnitIcon/Button').set('pressed', false)
+
+	egg = null
+	egg_hex = null
+	
+	enable_unit_selection(true)
+
+func enable_unit_selection(value):
+	for icon in get_units_panel().get_children():
+		if value:
+			icon.get_node('Button').set('disabled', false)
+		else:
+			icon.get_node('Button').set('pressed', false)
+			icon.get_node('Button').set('disabled', true)
+

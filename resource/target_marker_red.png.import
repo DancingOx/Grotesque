@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coloring_stripes.png-a6200b0a790e0d93f5f8dae2fbd1deca.stex"
+path="res://.import/target_marker_red.png-6af8df4e4b7bd032b0cdbdabb0f2cff6.stex"
 
 [deps]
 
-source_file="res://resource/coloring_stripes.png"
-dest_files=[ "res://.import/coloring_stripes.png-a6200b0a790e0d93f5f8dae2fbd1deca.stex" ]
+source_file="res://resource/target_marker_red.png"
+dest_files=[ "res://.import/target_marker_red.png-6af8df4e4b7bd032b0cdbdabb0f2cff6.stex" ]
 
 [params]
 

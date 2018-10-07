@@ -17,6 +17,7 @@ func _ready():
 	human.color = Color(0.0, 0.9, 0.9, 0.5)
 	human.particles_material = load('res://crosses_material.tres')
 	human.units_material = load('res://fire_material_blue.tres')
+	human.egg_texture = preload('res://resource/egg.png')
 	self.add_child(human)
 
 	opponent = player_template.instance()
@@ -24,6 +25,7 @@ func _ready():
 	opponent.color = Color(0.0, 0.9, 0.0, 0.5)
 	opponent.particles_material = load('res://crosses_material2.tres')
 	opponent.units_material = load('res://fire_material_green.tres')
+	opponent.egg_texture = preload('res://resource/egg_green.png')
 	self.add_child(opponent)
 
 	var scene = get_node("/root/main/game/scene")
@@ -74,6 +76,26 @@ func to_plan_phase():
 				map.units_placement[human].erase(cell1)
 				map.units_placement[opponent].erase(cell2)
 	
+	for egg_cell in map.eggs_placement[human].keys():
+		var broken = false
+		for unit_cell in map.units_placement[opponent]:
+			if egg_cell == unit_cell:
+				map.smash_egg(egg_cell)
+				broken = true
+				break
+		if not broken:
+			map.hatch_egg(egg_cell)
+
+	for egg_cell in map.eggs_placement[opponent].keys():
+		var broken = false
+		for unit_cell in map.units_placement[human]:
+			if egg_cell == unit_cell:
+				map.smash_egg(egg_cell)
+				broken = true
+				break
+		if not broken:
+			map.hatch_egg(egg_cell)
+
 	for unit in opponent.units:
 		unit.hide()
 
@@ -98,3 +120,13 @@ func make_random_moves(player):
 	var cells = map.get_random_border_cells(player, player.units.size())
 	for i in range(cells.size()):
 		map.place_unit(player.units[i], cells[i])
+
+	while true:
+		var cell = map.get_random_free_cell(player)
+		if cell == null:
+			break  # all posessed cells are occupied
+		
+		if not player.pay_for_new_unit():
+			break  # no enouth wealth
+
+		map.place_new_egg(cell)
