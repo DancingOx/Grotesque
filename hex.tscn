@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://hex.gd" type="Script" id=1]
 [ext_resource path="res://resource/hex.png" type="Texture" id=2]
-[ext_resource path="res://crosses_material2.tres" type="Material" id=3]
-[ext_resource path="res://resource/spark_particle2.png" type="Texture" id=4]
-[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://resource/mox_bw.png" type="Texture" id=3]
+[ext_resource path="res://crosses_material2.tres" type="Material" id=4]
+[ext_resource path="res://resource/spark_particle2.png" type="Texture" id=5]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -16,10 +23,10 @@ points = PoolVector2Array( -2.5, 0, 2.5, 0, 5, 5.3, 5, 9.6, 2.5, 15, -2.5, 15, -
 size = 30
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 5 )
+font_data = ExtResource( 6 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="area" type="Area2D" index="0"]
+[node name="area" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -36,20 +43,27 @@ _sections_unfolded = [ "Pickable" ]
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Visibility", "Z Index" ]
 
-[node name="collider" type="CollisionShape2D" parent="." index="1"]
+[node name="mox" type="Sprite" parent="." index="1"]
+
+material = SubResource( 3 )
+position = Vector2( 0, 39 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="collider" type="CollisionShape2D" parent="." index="2"]
 
 position = Vector2( -1.40071e-05, -14.2857 )
 scale = Vector2( 25.5625, 9.2381 )
 shape = SubResource( 1 )
 
-[node name="coloring" type="Sprite" parent="." index="2"]
+[node name="coloring" type="Sprite" parent="." index="3"]
 
-modulate = Color( 0.460938, 0.460938, 0.460938, 1 )
-self_modulate = Color( 0.859375, 0, 0, 1 )
+modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, 37 )
 _sections_unfolded = [ "Material", "Visibility" ]
 
-[node name="particles" type="Particles2D" parent="." index="3"]
+[node name="particles" type="Particles2D" parent="." index="4"]
 
 position = Vector2( -115, -6 )
 emitting = false
@@ -65,14 +79,14 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = ExtResource( 3 )
-texture = ExtResource( 4 )
+process_material = ExtResource( 4 )
+texture = ExtResource( 5 )
 normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Material", "Process Material" ]
 
-[node name="income" type="Label" parent="." index="4"]
+[node name="income" type="Label" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0

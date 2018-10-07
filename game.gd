@@ -18,6 +18,7 @@ func _ready():
 	human.particles_material = load('res://crosses_material.tres')
 	human.units_material = load('res://fire_material_blue.tres')
 	human.egg_texture = preload('res://resource/egg.png')
+	human.mox_texture = preload('res://resource/mox_blue.png')
 	self.add_child(human)
 
 	opponent = player_template.instance()
@@ -26,6 +27,7 @@ func _ready():
 	opponent.particles_material = load('res://crosses_material2.tres')
 	opponent.units_material = load('res://fire_material_green.tres')
 	opponent.egg_texture = preload('res://resource/egg_green.png')
+	opponent.mox_texture = preload('res://resource/mox_green.png')
 	self.add_child(opponent)
 
 	var scene = get_node("/root/main/game/scene")

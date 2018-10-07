@@ -10,6 +10,7 @@ var color
 var particles_material
 var units_material
 var egg_texture
+var mox_texture
 
 var cells = []
 

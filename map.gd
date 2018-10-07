@@ -261,6 +261,9 @@ func capture_cell(cell, player):
 		hex.show_captured()
 		posession[cell] = player
 
+		nodes[cell].get_node('mox').set('visible', true)
+		nodes[cell].get_node('mox').set('texture', player.mox_texture)
+
 func get_random_border_cells(player, count):
 	var border_cells = get_border_cells(player)
 	
