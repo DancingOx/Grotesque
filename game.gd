@@ -9,6 +9,7 @@ var map
 var human
 var opponent
 
+var turn = 1
 var phase = 0
 
 func _ready():
@@ -111,6 +112,9 @@ func to_plan_phase():
 	map.highlight_border_cells(human)
 
 	set_units_unpickable(true)
+	
+	turn += 1
+	get_node('/root/main/canvas/GUI/MarginContainer/VBoxContainer/TopPanel/Right/Turn').text = 'Turn %s' % turn
 
 func set_units_unpickable(value):
 	for unit in human.units:
