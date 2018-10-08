@@ -14,8 +14,11 @@ func _ready():
 
 func _on_TextureButton_button_down():
 	for icon in self.get_parent().get_children():
-		if icon != self:
+		if icon == self:
+			icon.unit.get_node('selection').visible = true
+		else:
 			icon.get_node('Button').set('pressed', false)
+			icon.unit.get_node('selection').visible = false
 
 func set_placed(placed):
 	if placed:

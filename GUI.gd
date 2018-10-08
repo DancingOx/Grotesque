@@ -30,15 +30,18 @@ func set_unit_selected(unit):
 	var selected_icon = get_selected_unit_icon()
 	if selected_icon:
 		selected_icon.get_node('Button').set('pressed', false)
+		selected_icon.unit.get_node('selection').visible = false
 
 	var icon = find_icon_by_unit(unit)
 	if icon:
 		icon.get_node('Button').set('pressed', true)
+	
+	icon.unit.get_node('selection').visible = true
 
 func unselect_all_units():
-	var selected_icon = get_selected_unit_icon()
-	if selected_icon:
-		selected_icon.get_node('Button').set('pressed', false)
+	for icon in get_units_panel().get_children():
+		icon.get_node('Button').set('pressed', false)
+		icon.unit.get_node('selection').visible = false
 
 func _on_ButtonNextTurn_pressed():
 	game.next_phase()

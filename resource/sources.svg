@@ -466,9 +466,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.90509668"
-     inkscape:cx="327.2426"
-     inkscape:cy="630.75624"
+     inkscape:zoom="3.6203867"
+     inkscape:cx="262.00822"
+     inkscape:cy="747.94374"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -497,6 +497,14 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <path
+       style="fill:#ff71ff;fill-opacity:0.26442339;stroke:none"
+       d="m 235.88896,288.87723 40,-30 70,0 40,30 -40,30 -70,0 z"
+       id="path4372"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/chil/Документы/coloring_magenta.png"
+       inkscape:export-xdpi="148.91345"
+       inkscape:export-ydpi="148.91345" />
     <path
        style="fill:#00e2ff;fill-opacity:0.26442309;stroke:#00aede;stroke-width:4.69999981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        d="m 55.264081,73.917521 40,-30 69.999999,0 40,30 -40,29.999999 -69.999999,0 z"
@@ -599,6 +607,32 @@
          id="path2993"
          d="m 610,572.36218 0,-20 40,-30 0,20"
          style="fill:#787878;fill-opacity:1;stroke:#bebebe;stroke-width:2.5999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g4406"
+       inkscape:export-filename="/home/chil/Godot/Grotesque/resource/selection.png"
+       inkscape:export-xdpi="148"
+       inkscape:export-ydpi="148">
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:0.98736978;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 296.85065,307.03258 0,7.47895 7.89327,0 0,0"
+         id="path4374"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4400"
+         d="m 304.53676,260.82542 -7.47895,0 0,7.89327 0,0"
+         style="fill:none;stroke:#ffffff;stroke-width:0.98736978;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4402"
+         d="m 332.74392,307.03258 0,7.47895 -7.89327,0 0,0"
+         style="fill:none;stroke:#ffffff;stroke-width:0.98736978;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:0.98736978;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 325.05781,260.82542 7.47895,0 0,7.89327 0,0"
+         id="path4404"
+         inkscape:connector-curvature="0" />
     </g>
   </g>
 </svg>
