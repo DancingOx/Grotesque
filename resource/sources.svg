@@ -466,9 +466,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.6203867"
-     inkscape:cx="262.00822"
-     inkscape:cy="747.94374"
+     inkscape:zoom="1.8101934"
+     inkscape:cx="169.75288"
+     inkscape:cy="571.16704"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -634,5 +634,28 @@
          id="path4404"
          inkscape:connector-curvature="0" />
     </g>
+    <rect
+       style="opacity:0.90000000000000002;fill:#1f8343;fill-opacity:1;fill-rule:nonzero;stroke:#cf52e5;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3866"
+       width="155"
+       height="90"
+       x="245"
+       y="482.36218"
+       inkscape:export-filename="/home/chil/TestOverlapCollisionShape2D/tile.png"
+       inkscape:export-xdpi="148"
+       inkscape:export-ydpi="148" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.9;fill:#1f2fff;fill-opacity:1;fill-rule:nonzero;stroke:#ff0017;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3094"
+       sodipodi:cx="315"
+       sodipodi:cy="422.36218"
+       sodipodi:rx="40"
+       sodipodi:ry="30"
+       d="m 355,422.36218 a 40,30 0 1 1 -80,0 40,30 0 1 1 80,0 z"
+       inkscape:export-filename="/home/chil/TestOverlapCollisionShape2D/unit.png"
+       inkscape:export-xdpi="148"
+       inkscape:export-ydpi="148"
+       transform="matrix(0.91579109,0,0,1.1514818,48.622894,-75.954755)" />
   </g>
 </svg>

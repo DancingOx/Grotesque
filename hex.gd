@@ -19,8 +19,9 @@ func _ready():
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		map.clicked.append(self)
-		map.set_process_click(event.button_index)
+		if not event.is_pressed() and not get_tree().is_input_handled():
+			map.clicked.append(self)
+			map.set_process_click(event.button_index)
 
 	elif event is InputEventMouseMotion:
 		map.moved.append(self)

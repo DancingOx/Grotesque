@@ -68,6 +68,7 @@ func _fill():
 
 		hex.z_index = d - 1000
 		hex.index = cell
+		hex.get_node('collider').z_index = d - 1000
 
 		hexes.add_child(hex)
 

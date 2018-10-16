@@ -9,8 +9,9 @@ func _ready():
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		gui.set_unit_selected(self)
-		#SceneTree.set_input_as_handled()
+		if not event.is_pressed():
+			gui.set_unit_selected(self)
+			get_tree().set_input_as_handled()
 
 func hide():
 	visible = false

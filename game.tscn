@@ -11,8 +11,7 @@ blend_mode = 0
 light_mode = 0
 _sections_unfolded = [ "Resource" ]
 
-[node name="main" type="Control" index="0"]
-
+[node name="main" type="Control"]
 material = SubResource( 1 )
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,8 +25,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Material", "Mouse", "Rendering" ]
 
-[node name="game" type="Control" parent="." index="0"]
-
+[node name="game" type="Control" parent="."]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -41,8 +39,7 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Mouse", "Z Index" ]
 
-[node name="scene" type="Control" parent="game" index="0"]
-
+[node name="scene" type="Control" parent="game"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -55,8 +52,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="camera" type="Camera2D" parent="game/scene" index="0"]
-
+[node name="camera" type="Camera2D" parent="game/scene"]
 anchor_mode = 0
 rotating = false
 current = true
@@ -90,8 +86,7 @@ zoomMax = 3.0
 marginX = 0.0
 marginY = 0.0
 
-[node name="canvas" type="CanvasLayer" parent="." index="1"]
-
+[node name="canvas" type="CanvasLayer" parent="."]
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -99,9 +94,7 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 _sections_unfolded = [ "Pause" ]
 
-[node name="GUI" parent="canvas" index="0" instance=ExtResource( 3 )]
-
+[node name="GUI" parent="canvas" instance=ExtResource( 3 )]
 mouse_filter = 2
 _sections_unfolded = [ "Anchor", "Margin", "Mouse", "Size Flags", "Theme", "custom_constants" ]
-
 
