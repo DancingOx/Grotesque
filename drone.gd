@@ -4,6 +4,11 @@ onready var gui = get_node('/root/main/canvas/GUI')
 
 var player
 
+const max_hp = 100
+var hp = max_hp
+
+const attack = 30
+
 func _ready():
 	pass
 

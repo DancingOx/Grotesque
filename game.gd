@@ -65,7 +65,7 @@ func to_show_phase():
 	for unit in opponent.units:
 		unit.show()
 
-	get_node('/root/main/canvas/GUI').unselect_all_units()
+	$'/root/main/canvas/GUI'.unselect_all_units()
 
 	set_units_unpickable(false)
 
@@ -74,11 +74,22 @@ func to_plan_phase():
 	for cell1 in map.units_placement[human]:
 		for cell2 in map.units_placement[opponent]:
 			if cell1 == cell2:
-				map.units_placement[human][cell1].remove()
-				map.units_placement[opponent][cell2].remove()
-				map.units_placement[human].erase(cell1)
-				map.units_placement[opponent].erase(cell2)
-	
+				var unit1 = map.units_placement[human][cell1]
+				var unit2 = map.units_placement[opponent][cell2]
+
+				unit1.hp -= unit2.attack
+				unit2.hp -= unit1.attack
+
+				if unit1.hp <= 0:
+					unit1.remove()
+					map.units_placement[human].erase(cell1)
+
+				if unit2.hp <= 0:
+					unit2.remove()
+					map.units_placement[opponent].erase(cell2)
+
+	$'/root/main/canvas/GUI'.refresh_lifebars()
+
 	for egg_cell in map.eggs_placement[human].keys():
 		var broken = false
 		for unit_cell in map.units_placement[opponent]:

@@ -103,3 +103,6 @@ func enable_unit_selection(value):
 			icon.button.set('pressed', false)
 			icon.button.set('disabled', true)
 
+func refresh_lifebars():
+	for icon in get_units_panel().get_children():
+		icon.lifebar.value = icon.unit.hp

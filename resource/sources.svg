@@ -466,9 +466,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8101934"
-     inkscape:cx="169.75288"
-     inkscape:cy="571.16704"
+     inkscape:zoom="20.48"
+     inkscape:cx="289.46916"
+     inkscape:cy="710.22165"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -657,5 +657,31 @@
        inkscape:export-xdpi="148"
        inkscape:export-ydpi="148"
        transform="matrix(0.91579109,0,0,1.1514818,48.622894,-75.954755)" />
+    <rect
+       style="opacity:0.9;fill:#e5d2ea;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.75805938;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3086"
+       width="30.322374"
+       height="3.7902968"
+       x="274.87903"
+       y="337.24121"
+       inkscape:export-filename="/home/chil/Godot/Grotesque/resource/lifebar_bg.png"
+       inkscape:export-xdpi="148"
+       inkscape:export-ydpi="148" />
+    <path
+       style="opacity:0.9;fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:none"
+       d="m 274.64562,350.3704 -0.12088,-0.10801 0,-2.01962 0,-2.01962 0.121,-0.12101 0.12101,-0.12101 15.22156,-0.009 c 14.43719,-0.009 15.2282,-0.006 15.35058,0.0555 0.071,0.0356 0.15008,0.10646 0.17578,0.15735 0.0363,0.0718 0.0446,0.53865 0.0375,2.08513 l -0.009,1.99259 -0.12088,0.10799 -0.12088,0.10799 -15.26736,0 -15.26736,0 -0.12088,-0.10801 z m 30.19409,-2.13138 0,-1.51759 -14.7966,-0.009 -14.79659,-0.009 0,1.5362 0,1.5362 14.79659,-0.009 14.7966,-0.009 0,-1.5176 z"
+       id="path3870"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/chil/Godot/Grotesque/resource/lifebar_fill.png"
+       inkscape:export-xdpi="148"
+       inkscape:export-ydpi="148" />
+    <path
+       style="opacity:0.9;fill:#b4005b;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       d="m 275.28354,348.23902 0,-1.49909 14.76883,0 14.76883,0 0,1.49909 0,1.49909 -14.76883,0 -14.76883,0 0,-1.49909 z"
+       id="path3872"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/chil/Godot/Grotesque/resource/lifebar_fill.png"
+       inkscape:export-xdpi="148"
+       inkscape:export-ydpi="148" />
   </g>
 </svg>

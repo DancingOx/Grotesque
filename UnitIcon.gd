@@ -6,11 +6,13 @@ var tex_placed_unchecked = preload('res://resource/icon_2_1.png')
 var tex_placed_checked = preload('res://resource/icon_2_2.png')
 
 onready var button = $'VBoxContainer/Button'
+onready var lifebar = $'VBoxContainer/lifebar'
 
 var unit
 
 func _ready():
-	pass
+	lifebar.max_value = unit.max_hp
+	lifebar.value = unit.hp
 
 func _on_TextureButton_button_down():
 	for icon in self.get_parent().get_children():
