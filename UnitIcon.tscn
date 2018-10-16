@@ -5,7 +5,6 @@
 [ext_resource path="res://resource/icon_1_2.png" type="Texture" id=3]
 
 [node name="UnitIcon" type="MarginContainer"]
-
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -21,14 +20,27 @@ size_flags_vertical = 3
 script = ExtResource( 1 )
 _sections_unfolded = [ "Mouse", "Size Flags", "Theme", "Visibility" ]
 
-[node name="Button" type="TextureButton" parent="." index="0"]
-
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 76.0
+margin_right = 69.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="Button" type="TextureButton" parent="VBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 69.0
 margin_bottom = 68.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -44,8 +56,6 @@ group = null
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 stretch_mode = 4
-_sections_unfolded = [ "Mouse", "Size Flags", "Textures" ]
+_sections_unfolded = [ "Mouse", "Script", "Size Flags", "Textures" ]
 
-[connection signal="button_down" from="Button" to="." method="_on_TextureButton_button_down"]
-
-
+[connection signal="button_down" from="VBoxContainer/Button" to="." method="_on_TextureButton_button_down"]

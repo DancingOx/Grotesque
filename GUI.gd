@@ -18,7 +18,7 @@ func add_unit_icon(unit):
 
 func get_selected_unit_icon():
 	for icon in get_units_panel().get_children():
-		if icon.get_node('Button').get('pressed'):
+		if icon.button.get('pressed'):
 			return icon
 
 func find_icon_by_unit(unit):
@@ -29,18 +29,18 @@ func find_icon_by_unit(unit):
 func set_unit_selected(unit):
 	var selected_icon = get_selected_unit_icon()
 	if selected_icon:
-		selected_icon.get_node('Button').set('pressed', false)
+		selected_icon.button.set('pressed', false)
 		selected_icon.unit.get_node('selection').visible = false
 
 	var icon = find_icon_by_unit(unit)
 	if icon:
-		icon.get_node('Button').set('pressed', true)
+		icon.button.set('pressed', true)
 	
 	icon.unit.get_node('selection').visible = true
 
 func unselect_all_units():
 	for icon in get_units_panel().get_children():
-		icon.get_node('Button').set('pressed', false)
+		icon.button.set('pressed', false)
 		icon.unit.get_node('selection').visible = false
 
 func _on_ButtonNextTurn_pressed():
@@ -98,8 +98,8 @@ func place_egg(hex):
 func enable_unit_selection(value):
 	for icon in get_units_panel().get_children():
 		if value:
-			icon.get_node('Button').set('disabled', false)
+			icon.button.set('disabled', false)
 		else:
-			icon.get_node('Button').set('pressed', false)
-			icon.get_node('Button').set('disabled', true)
+			icon.button.set('pressed', false)
+			icon.button.set('disabled', true)
 

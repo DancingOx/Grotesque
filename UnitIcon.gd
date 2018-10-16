@@ -5,7 +5,7 @@ var tex_free_checked = preload('res://resource/icon_1_2.png')
 var tex_placed_unchecked = preload('res://resource/icon_2_1.png')
 var tex_placed_checked = preload('res://resource/icon_2_2.png')
 
-onready var button = self.get_node('Button')
+onready var button = $'VBoxContainer/Button'
 
 var unit
 
@@ -17,7 +17,7 @@ func _on_TextureButton_button_down():
 		if icon == self:
 			icon.unit.get_node('selection').visible = true
 		else:
-			icon.get_node('Button').set('pressed', false)
+			icon.button.set('pressed', false)
 			icon.unit.get_node('selection').visible = false
 
 func set_placed(placed):
