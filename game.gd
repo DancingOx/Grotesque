@@ -134,12 +134,26 @@ func set_units_unpickable(value):
 		unit.input_pickable = value
 
 func make_random_moves(player):
-	var cells = map.get_random_border_cells(player, player.units.size())
-	for i in range(cells.size()):
-		map.place_unit(player.units[i], cells[i])
+	var defenders = 0
+
+	var contact_cells = map.get_contact_cells(player)
+	var contact_count = contact_cells.size()
+	if contact_count:
+		defenders = randi() % int(min(player.units.size(), contact_count))
+		for i in range(defenders):
+			map.place_unit(player.units[i], contact_cells[randi() % contact_count])
+	
+	print('contact_count', contact_count)
+	print('defenders', defenders)
+	
+	var border_cells = map.get_random_border_cells(player, player.units.size())
+	for i in range(min(border_cells.size(), player.units.size() - defenders)):
+		map.place_unit(player.units[i + defenders], border_cells[i])
 
 	while true:
-		var cell = map.get_random_free_cell(player)
+		var cell = map.get_random_safe_free_cell(player)
+		if cell == null:
+			cell = map.get_random_free_cell(player)
 		if cell == null:
 			break  # all posessed cells are occupied
 		

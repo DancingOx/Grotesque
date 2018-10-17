@@ -303,6 +303,25 @@ func get_random_free_cell(player):
 	
 	return free_cells[randi() % free_cells.size()]
 
+func get_random_safe_free_cell(player):
+	var contact_cells = get_contact_cells(player)
+	
+	var free_cells = []
+	for cell in player.cells:
+		if cell in units_placement[player]:
+			continue
+		if cell in eggs_placement[player]:
+			continue
+		if cell in contact_cells:
+			continue
+		
+		free_cells.append(cell)
+	
+	if not free_cells:
+		return null
+	
+	return free_cells[randi() % free_cells.size()]
+
 func place_new_egg(index):
 	var player = posession[index]
 	if not player:
@@ -312,4 +331,15 @@ func place_new_egg(index):
 	new_egg.get_node('Sprite').set('texture', player.egg_texture)
 	nodes[index].add_child(new_egg)
 	eggs_placement[player][index] = new_egg
+
+func get_contact_cells(player):
+	var contact_cells = []
+	
+	for cell in player.cells:
+		for neighbor_cell in get_neighbor_cells(cell):
+			if neighbor_cell in posession and posession[neighbor_cell] != player:
+				if not neighbor_cell in contact_cells:
+					contact_cells.append(cell)
+	
+	return contact_cells
 
