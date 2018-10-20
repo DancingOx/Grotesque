@@ -127,7 +127,15 @@ func to_plan_phase():
 
 	for player in map.units_placement:
 		for cell in map.units_placement[player]:
-			map.capture_cell(cell, player)
+			var the_only_one = true
+			for other_player in map.units_placement:
+				if other_player == player:
+					continue
+				if cell in map.units_placement[other_player]:
+					the_only_one = false
+					break
+			if the_only_one:
+				map.capture_cell(cell, player)
 
 	map.highlight_border_cells(human)
 
