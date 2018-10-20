@@ -1,7 +1,7 @@
 extends Control
 
-var map_template = preload('res://map.tscn')
-var player_template = preload('res://player.tscn')
+var map_template = preload('res://map/map.tscn')
+var player_template = preload('res://player/player.tscn')
 
 var map_name = 'default'
 
@@ -15,18 +15,18 @@ var phase = 0
 func _ready():
 	human = player_template.instance()
 	human.role = 'human'
-	human.color = Color(0.0, 0.9, 0.9, 0.5)
-	human.particles_material = load('res://crosses_material_blue.tres')
-	human.units_material = load('res://fire_material_blue.tres')
+	human.color = Color(0.0, 0.9, 0.9, 0.9)
+	#human.particles_material = load('res://hex/crosses_material_blue.tres')
+	human.units_material = load('res://unit/fire_material_blue.tres')
 	human.egg_texture = preload('res://resource/egg.png')
 	human.mox_texture = preload('res://resource/mox_blue.png')
 	self.add_child(human)
 
 	opponent = player_template.instance()
 	opponent.role = 'ai'
-	opponent.color = Color(0.0, 0.9, 0.0, 0.5)
-	opponent.particles_material = load('res://crosses_material_green.tres')
-	opponent.units_material = load('res://fire_material_green.tres')
+	opponent.color = Color(0.9, 0.9, 0.0, 0.9)
+	#opponent.particles_material = load('res://hex/crosses_material_green.tres')
+	opponent.units_material = load('res://unit/fire_material_green.tres')
 	opponent.egg_texture = preload('res://resource/egg_green.png')
 	opponent.mox_texture = preload('res://resource/mox_green.png')
 	self.add_child(opponent)
@@ -65,7 +65,7 @@ func to_show_phase():
 	for unit in opponent.units:
 		unit.show()
 
-	$'/root/main/canvas/GUI'.unselect_all_units()
+	$'/root/main/canvas/gui'.unselect_all_units()
 
 	set_units_unpickable(false)
 
@@ -88,7 +88,7 @@ func to_plan_phase():
 					unit2.remove()
 					map.units_placement[opponent].erase(cell2)
 
-	$'/root/main/canvas/GUI'.refresh_lifebars()
+	$'/root/main/canvas/gui'.refresh_lifebars()
 
 	for egg_cell in map.eggs_placement[human].keys():
 		var broken = false
@@ -125,7 +125,7 @@ func to_plan_phase():
 	set_units_unpickable(true)
 	
 	turn += 1
-	get_node('/root/main/canvas/GUI/MarginContainer/VBoxContainer/TopPanel/Right/Turn').text = 'Turn %s' % turn
+	get_node('/root/main/canvas/gui/MarginContainer/VBoxContainer/TopPanel/Right/Turn').text = 'Turn %s' % turn
 
 func set_units_unpickable(value):
 	for unit in human.units:

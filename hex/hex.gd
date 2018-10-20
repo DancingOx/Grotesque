@@ -31,13 +31,13 @@ func on_move():
 	map.pointer.visible = true
 	map.pointer.set_position(self.position - Vector2(0, -35))
 	
-	var gui = $'/root/main/canvas/GUI'
+	var gui = $'/root/main/canvas/gui'
 	if gui.egg:
 		if check_egg_can_be_placed($'/root/main/game'.human):
 			gui.move_egg(self)
 
 func on_left_click():
-	var gui = $'/root/main/canvas/GUI'
+	var gui = $'/root/main/canvas/gui'
 	if gui.egg:
 		if check_egg_can_be_placed($'/root/main/game'.human):
 			gui.place_egg(self)
@@ -48,9 +48,11 @@ func on_right_click():
 	pass
 
 func show_captured():
-	var particles = get_node("particles")
-	particles.process_material = player.particles_material
-	particles.emitting = true
+	pass
+	#var particles = get_node("particles")
+	#particles.process_material = player.particles_material
+	#particles.process_material.color = player.color
+	#particles.emitting = true
 
 func highlight_move_possible():
 	if player and player.role == 'ai':

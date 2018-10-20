@@ -1,9 +1,13 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://GUI.gd" type="Script" id=1]
+[ext_resource path="res://gui/gui.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://UnitIconAdd.tscn" type="PackedScene" id=3]
+[ext_resource path="res://icon_add_unit/icon_add_unit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resource/turn.png" type="Texture" id=4]
+
+
+
+
 
 [sub_resource type="DynamicFont" id=1]
 

@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var gui = get_node('/root/main/canvas/GUI')
+onready var gui = get_node('/root/main/canvas/gui')
 
 var player
 

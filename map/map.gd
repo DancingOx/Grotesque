@@ -1,9 +1,9 @@
 extends Control
 
-onready var gui = get_node('/root/main/canvas/GUI')
+onready var gui = get_node('/root/main/canvas/gui')
 
-var hex_template = preload('res://hex.tscn')
-var egg_template = preload('res://egg.tscn')
+var hex_template = preload('res://hex/hex.tscn')
+var egg_template = preload('res://egg/egg.tscn')
 
 var x0 = -550
 var y0 = 510

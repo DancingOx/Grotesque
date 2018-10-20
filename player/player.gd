@@ -1,9 +1,9 @@
 extends Control
 
 onready var game = get_node('/root/main/game')
-onready var gui = get_node('/root/main/canvas/GUI')
+onready var gui = get_node('/root/main/canvas/gui')
 
-var drone_template = preload('res://drone.tscn')
+var drone_template = preload('res://unit/unit.tscn')
 
 var role
 var color

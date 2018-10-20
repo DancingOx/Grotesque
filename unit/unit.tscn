@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://drone.gd" type="Script" id=1]
+[ext_resource path="res://unit/unit.gd" type="Script" id=1]
 [ext_resource path="res://resource/selection.png" type="Texture" id=2]
-[ext_resource path="res://fire_material_green.tres" type="Material" id=3]
+[ext_resource path="res://unit/fire_material_green.tres" type="Material" id=3]
 [ext_resource path="res://resource/fire_particle.png" type="Texture" id=4]
+
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -11,7 +12,6 @@ custom_solver_bias = 0.0
 radius = 10.0
 
 [node name="Area2D" type="Area2D"]
-
 position = Vector2( 0, 10 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -24,13 +24,11 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-
 position = Vector2( 0.820695, -20.0509 )
 scale = Vector2( 3.50031, 4.4751 )
 shape = SubResource( 1 )
 
 [node name="selection" type="Sprite" parent="." index="1"]
-
 visible = false
 position = Vector2( 0, -27 )
 scale = Vector2( 1, 1 )
@@ -38,7 +36,6 @@ texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="particles" type="Particles2D" parent="." index="2"]
-
 position = Vector2( 1.56903, -18.348 )
 scale = Vector2( 1.35722, 1.42662 )
 emitting = true
@@ -60,5 +57,4 @@ normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material", "Textures" ]
-
 

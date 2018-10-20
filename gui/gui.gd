@@ -1,6 +1,6 @@
 extends Container
 
-var unit_icon_template = preload('res://UnitIcon.tscn')
+var unit_icon_template = preload('res://icon_unit/icon_unit.tscn')
 
 onready var game = get_node('/root/main/game')
 
@@ -57,7 +57,7 @@ func activate_egg_placing_mode():
 		return
 	
 	enable_unit_selection(false)
-	egg = load('res://egg.tscn').instance()
+	egg = load('res://egg/egg.tscn').instance()
 	
 	return true
 

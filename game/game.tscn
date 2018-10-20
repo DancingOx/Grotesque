@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://game.gd" type="Script" id=1]
-[ext_resource path="res://CameraMovement.gd" type="Script" id=2]
-[ext_resource path="res://GUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/game.gd" type="Script" id=1]
+[ext_resource path="res://camera/camera_movement.gd" type="Script" id=2]
+[ext_resource path="res://gui/gui.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -94,7 +94,7 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 _sections_unfolded = [ "Pause" ]
 
-[node name="GUI" parent="canvas" instance=ExtResource( 3 )]
+[node name="gui" parent="canvas" instance=ExtResource( 3 )]
 mouse_filter = 2
 _sections_unfolded = [ "Anchor", "Margin", "Mouse", "Size Flags", "Theme", "custom_constants" ]
 
