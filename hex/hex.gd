@@ -34,13 +34,18 @@ func on_move():
 	var gui = $'/root/main/canvas/gui'
 	if gui.egg:
 		if check_egg_can_be_placed($'/root/main/game'.human):
+			gui.egg.visible = true
 			gui.move_egg(self)
+		else:
+			gui.egg.visible = false
 
 func on_left_click():
 	var gui = $'/root/main/canvas/gui'
 	if gui.egg:
 		if check_egg_can_be_placed($'/root/main/game'.human):
 			gui.place_egg(self)
+		else:
+			gui.deactivate_egg_placing_mode()
 	else:
 		map.place_selected_unit(index)
 
@@ -69,5 +74,8 @@ func check_egg_can_be_placed(for_player):
 	
 	if index in map.eggs_placement[player]:
 		return false  # hex is occupied by another egg
+	
+	if index in map.bonuses:
+		return false  # hex is occupied by bonus location
 	
 	return true

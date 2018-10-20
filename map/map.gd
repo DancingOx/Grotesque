@@ -320,6 +320,8 @@ func get_random_free_cell(player):
 			continue
 		if cell in eggs_placement[player]:
 			continue
+		if cell in bonuses:
+			continue
 		
 		free_cells.append(cell)
 	
@@ -336,6 +338,8 @@ func get_random_safe_free_cell(player):
 		if cell in units_placement[player]:
 			continue
 		if cell in eggs_placement[player]:
+			continue
+		if cell in bonuses:
 			continue
 		if cell in contact_cells:
 			continue

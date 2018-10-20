@@ -65,3 +65,7 @@ func pay_for_new_unit():
 	gui.update_wealth_indicator(wealth)
 
 	return true
+
+func return_new_unit_payment():
+	wealth += unit_cost
+	gui.update_wealth_indicator(wealth)

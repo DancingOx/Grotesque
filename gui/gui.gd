@@ -63,9 +63,13 @@ func activate_egg_placing_mode():
 
 func deactivate_egg_placing_mode():
 	if egg:
+		game.human.return_new_unit_payment()
+
 		egg.queue_free()
 		egg = null
 		egg_hex = null
+
+	$'MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/AddUnitIcon/Button'.set('pressed', false)
 
 	enable_unit_selection(true)
 
@@ -88,7 +92,7 @@ func place_egg(hex):
 
 	game.map.eggs_placement[hex.player][hex.index] = egg
 
-	get_node('MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/AddUnitIcon/Button').set('pressed', false)
+	$'MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/AddUnitIcon/Button'.set('pressed', false)
 
 	egg = null
 	egg_hex = null
