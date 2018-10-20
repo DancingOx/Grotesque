@@ -69,6 +69,15 @@ func to_show_phase():
 
 	set_units_unpickable(false)
 
+	for cell1 in map.units_placement[human]:
+		for cell2 in map.units_placement[opponent]:
+			if cell1 == cell2:
+				var unit1 = map.units_placement[human][cell1]
+				var unit2 = map.units_placement[opponent][cell2]
+
+				unit1.shift()
+				unit2.shift()
+
 func to_plan_phase():
 	# battle
 	for cell1 in map.units_placement[human]:
@@ -79,7 +88,7 @@ func to_plan_phase():
 
 				unit1.hp -= unit2.attack
 				unit2.hp -= unit1.attack
-
+				
 				if unit1.hp <= 0:
 					unit1.remove()
 					map.units_placement[human].erase(cell1)
@@ -126,6 +135,11 @@ func to_plan_phase():
 	
 	turn += 1
 	get_node('/root/main/canvas/gui/MarginContainer/VBoxContainer/TopPanel/Right/Turn').text = 'Turn %s' % turn
+
+	for unit in human.units:
+		unit.shift_back()
+	for unit in opponent.units:
+		unit.shift_back()
 
 func set_units_unpickable(value):
 	for unit in human.units:
