@@ -48,7 +48,8 @@ func on_right_click():
 	pass
 
 func show_captured():
-	pass
+	if self.player and self.index in map.bonuses:
+		$'bonus'.texture = map.bonus_textures[map.bonuses[self.index] + '_' + self.player.color_name]
 
 func highlight_move_possible():
 	if player and player.role == 'ai':

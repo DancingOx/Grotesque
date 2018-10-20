@@ -7,6 +7,7 @@ var drone_template = preload('res://unit/unit.tscn')
 
 var role
 var color
+var color_name
 var particles_material
 var units_texture
 var egg_texture
@@ -17,6 +18,12 @@ var cells = []
 var units = []
 
 var wealth
+
+var income_table = {
+	'hangar_1': 10,
+	'hangar_2': 20,
+	'hangar_3': 30
+}
 
 func _ready():
 	wealth = 100
@@ -41,7 +48,8 @@ func create_unit():
 
 func apply_income():
 	for cell in cells:
-		wealth += game.map.nodes[cell].income
+		if cell in game.map.bonuses:
+			wealth += income_table[game.map.bonuses[cell]]
 
 	if role == 'human':
 		gui.update_wealth_indicator(wealth)

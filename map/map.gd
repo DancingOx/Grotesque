@@ -35,6 +35,19 @@ var nodes = {}
 var posession = {}
 var units_placement = {}
 var eggs_placement = {}
+var bonuses = {}
+
+var bonus_textures = {
+	'hangar_1_neutral': preload('res://resource/hangar_1_neutral.png'),
+	'hangar_2_neutral': preload('res://resource/hangar_2_neutral.png'),
+	'hangar_3_neutral': preload('res://resource/hangar_3_neutral.png'),
+	'hangar_1_blue': preload('res://resource/hangar_1_blue.png'),
+	'hangar_2_blue': preload('res://resource/hangar_2_blue.png'),
+	'hangar_3_blue': preload('res://resource/hangar_3_blue.png'),
+	'hangar_1_green': preload('res://resource/hangar_1_green.png'),
+	'hangar_2_green': preload('res://resource/hangar_2_green.png'),
+	'hangar_3_green': preload('res://resource/hangar_3_green.png')
+}
 
 func _init_cells():
 	for i in range(side):
@@ -50,6 +63,14 @@ func _generate():
 			map[cell] = 1
 		else:
 			map[cell] = 0
+
+		var bonus = rand_range(1, 10)
+		if  bonus > 8:
+			bonuses[cell] = 'hangar_3'
+		elif bonus > 7:
+			bonuses[cell] = 'hangar_2'
+		elif bonus > 5:
+			bonuses[cell] = 'hangar_1'
 
 func _fill():
 	for cell in cells:
@@ -71,6 +92,10 @@ func _fill():
 		hex.get_node('collider').z_index = d - 1000
 
 		hexes.add_child(hex)
+		
+		if cell in bonuses:
+			hex.get_node('bonus').visible = true
+			hex.get_node('bonus').texture = bonus_textures['%s_neutral' % bonuses[cell]]
 
 		nodes[cell] = hex
 
