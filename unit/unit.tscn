@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://unit/unit.gd" type="Script" id=1]
 [ext_resource path="res://resource/selection.png" type="Texture" id=2]
-[ext_resource path="res://unit/fire_material_green.tres" type="Material" id=3]
-[ext_resource path="res://resource/fire_particle.png" type="Texture" id=4]
-
+[ext_resource path="res://resource/angel_blue.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -23,38 +21,21 @@ audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.820695, -20.0509 )
 scale = Vector2( 3.50031, 4.4751 )
 shape = SubResource( 1 )
 
-[node name="selection" type="Sprite" parent="." index="1"]
+[node name="selection" type="Sprite" parent="."]
 visible = false
 position = Vector2( 0, -27 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="particles" type="Particles2D" parent="." index="2"]
+[node name="sprite" type="Sprite" parent="."]
 position = Vector2( 1.56903, -18.348 )
 scale = Vector2( 1.35722, 1.42662 )
-emitting = true
-amount = 32
-lifetime = 1.0
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
-explosiveness = 0.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = true
-draw_order = 0
-process_material = ExtResource( 3 )
-texture = ExtResource( 4 )
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Process Material", "Textures" ]
+texture = ExtResource( 3 )
+offset = Vector2( -1, 0 )
+_sections_unfolded = [ "Offset" ]
 

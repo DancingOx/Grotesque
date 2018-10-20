@@ -49,10 +49,6 @@ func on_right_click():
 
 func show_captured():
 	pass
-	#var particles = get_node("particles")
-	#particles.process_material = player.particles_material
-	#particles.process_material.color = player.color
-	#particles.emitting = true
 
 func highlight_move_possible():
 	if player and player.role == 'ai':

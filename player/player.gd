@@ -8,7 +8,7 @@ var drone_template = preload('res://unit/unit.tscn')
 var role
 var color
 var particles_material
-var units_material
+var units_texture
 var egg_texture
 var mox_texture
 
@@ -35,7 +35,7 @@ func create_unit():
 		unit.hide()
 
 	unit.player = self
-	unit.get_node('particles').process_material = units_material
+	unit.get_node('sprite').texture = unit.player.units_texture
 	
 	return unit
 
