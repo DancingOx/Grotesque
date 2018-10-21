@@ -8,7 +8,6 @@ var drone_template = preload('res://unit/unit.tscn')
 var role
 var color
 var color_name
-var particles_material
 var units_texture
 var egg_texture
 var mox_texture
@@ -25,8 +24,11 @@ var income_table = {
 	'hangar_3': 30
 }
 
+const INITIAL_WEALTH = 100
+const UNIT_COST = 300
+
 func _ready():
-	wealth = 100
+	wealth = INITIAL_WEALTH
 
 func create_unit():
 	var unit = drone_template.instance()
@@ -44,15 +46,13 @@ func apply_income():
 		if cell in game.map.bonuses:
 			wealth += income_table[game.map.bonuses[cell]]
 
-const unit_cost = 300
-
 func pay_for_new_unit():
-	if wealth < unit_cost:
+	if wealth < UNIT_COST:
 		return false
 	
-	wealth -= unit_cost
+	wealth -= UNIT_COST
 
 	return true
 
 func return_new_unit_payment():
-	wealth += unit_cost
+	wealth += UNIT_COST

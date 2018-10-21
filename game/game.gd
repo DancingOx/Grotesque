@@ -16,7 +16,6 @@ var phase = 0
 
 func _ready():
 	human = human_player_template.instance()
-	human.role = 'human'
 	human.color = Color(0.0, 0.9, 0.9, 0.9)
 	human.color_name = 'blue'
 	human.units_texture = load('res://resource/angel_blue.png')
@@ -25,7 +24,6 @@ func _ready():
 	self.add_child(human)
 
 	opponent = ai_player_template.instance()
-	opponent.role = 'ai'
 	opponent.color = Color(0.9, 0.9, 0.0, 0.9)
 	opponent.color_name = 'green'
 	opponent.units_texture = load('res://resource/angel_green.png')
@@ -61,9 +59,9 @@ func next_phase():
 func to_show_phase():
 	for cell in map.nodes:
 		map.nodes[cell].remove_highlight()
-	
-	make_random_moves(opponent)
-	
+
+	opponent.make_random_moves()
+
 	for unit in opponent.units:
 		unit.show()
 
@@ -156,32 +154,3 @@ func set_units_unpickable(value):
 		unit.input_pickable = value
 	for unit in opponent.units:
 		unit.input_pickable = value
-
-func make_random_moves(player):
-	var defenders = 0
-
-	var contact_cells = map.get_contact_cells(player)
-	var contact_count = contact_cells.size()
-	if contact_count:
-		defenders = randi() % int(min(player.units.size(), contact_count))
-		for i in range(defenders):
-			map.place_unit(player.units[i], contact_cells[randi() % contact_count])
-	
-	print('contact_count', contact_count)
-	print('defenders', defenders)
-	
-	var border_cells = map.get_random_border_cells(player, player.units.size())
-	for i in range(min(border_cells.size(), player.units.size() - defenders)):
-		map.place_unit(player.units[i + defenders], border_cells[i])
-
-	while true:
-		var cell = map.get_random_safe_free_cell(player)
-		if cell == null:
-			cell = map.get_random_free_cell(player)
-		if cell == null:
-			break  # all posessed cells are occupied
-		
-		if not player.pay_for_new_unit():
-			break  # no enouth wealth
-
-		map.place_new_egg(cell)

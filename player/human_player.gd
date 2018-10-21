@@ -3,6 +3,8 @@ extends "res://player/player.gd"
 func _ready():
 	._ready()
 
+	role = 'human'
+
 	gui.update_wealth_indicator(wealth)
 
 	print('Human player ready')
