@@ -27,19 +27,12 @@ var income_table = {
 
 func _ready():
 	wealth = 100
-	if role == 'human':
-		gui.update_wealth_indicator(wealth)
 
 func create_unit():
 	var unit = drone_template.instance()
 	units.append(unit)
 
 	unit.z_index = 2000
-	
-	if role == 'human':
-		gui.add_unit_icon(unit)
-	else:
-		unit.hide()
 
 	unit.player = self
 	unit.get_node('sprite').texture = unit.player.units_texture
@@ -51,9 +44,6 @@ func apply_income():
 		if cell in game.map.bonuses:
 			wealth += income_table[game.map.bonuses[cell]]
 
-	if role == 'human':
-		gui.update_wealth_indicator(wealth)
-
 const unit_cost = 300
 
 func pay_for_new_unit():
@@ -61,11 +51,8 @@ func pay_for_new_unit():
 		return false
 	
 	wealth -= unit_cost
-	
-	gui.update_wealth_indicator(wealth)
 
 	return true
 
 func return_new_unit_payment():
 	wealth += unit_cost
-	gui.update_wealth_indicator(wealth)
