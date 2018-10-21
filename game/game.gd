@@ -1,7 +1,9 @@
 extends Control
 
 var map_template = preload('res://map/map.tscn')
-var player_template = preload('res://player/player.tscn')
+
+var human_player_template = preload('res://player/human_player.tscn')
+var ai_player_template = preload('res://player/ai_player.tscn')
 
 var map_name = 'default'
 
@@ -13,7 +15,7 @@ var turn = 1
 var phase = 0
 
 func _ready():
-	human = player_template.instance()
+	human = human_player_template.instance()
 	human.role = 'human'
 	human.color = Color(0.0, 0.9, 0.9, 0.9)
 	human.color_name = 'blue'
@@ -22,7 +24,7 @@ func _ready():
 	human.mox_texture = preload('res://resource/mox_blue.png')
 	self.add_child(human)
 
-	opponent = player_template.instance()
+	opponent = ai_player_template.instance()
 	opponent.role = 'ai'
 	opponent.color = Color(0.9, 0.9, 0.0, 0.9)
 	opponent.color_name = 'green'
