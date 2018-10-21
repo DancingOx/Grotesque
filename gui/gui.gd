@@ -37,7 +37,9 @@ func set_unit_selected(unit):
 		icon.button.set('pressed', true)
 	
 	icon.unit.get_node('selection').visible = true
-
+	
+	game.refresh_possible_moves_highlight()
+	
 func unselect_all_units():
 	for icon in get_units_panel().get_children():
 		icon.button.set('pressed', false)

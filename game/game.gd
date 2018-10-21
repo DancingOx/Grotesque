@@ -59,8 +59,7 @@ func next_phase():
 		phase = 0
 	
 func to_show_phase():
-	for cell in map.nodes:
-		map.nodes[cell].remove_highlight()
+	map.clear_possible_moves_highlight()
 
 	opponent.place_eggs()
 	opponent.make_random_moves()
@@ -140,7 +139,9 @@ func to_plan_phase():
 			if the_only_one:
 				map.capture_cell(cell, player)
 
-	map.highlight_border_cells(human)
+	var unit = get_current_unit()
+	if unit:
+		map.highlight_possible_moves(unit)
 
 	set_units_unpickable(true)
 	
@@ -157,3 +158,13 @@ func set_units_unpickable(value):
 		unit.input_pickable = value
 	for unit in opponent.units:
 		unit.input_pickable = value
+
+func get_current_unit():
+	var icon = $'/root/main/canvas/gui'.get_selected_unit_icon()
+	return icon.unit if icon else null
+
+func refresh_possible_moves_highlight():
+	map.clear_possible_moves_highlight()
+	var unit = get_current_unit()
+	if unit:
+		map.highlight_possible_moves(unit)

@@ -11,7 +11,7 @@ var y0 = 510
 var a = 256 / 2;
 var h = 55;
 
-var order = 7
+var order = 6
 
 var side = 2 * order - 1;
 
@@ -127,11 +127,13 @@ func _set_random_starting_position(player):
 
 		if starting_cells.size() == 3:
 			break
-
+	
 	for cell in starting_cells:
 		capture_cell(cell, player)
-		var unit = player.create_unit('drone')
-		place_unit(unit, cell)
+
+	place_unit(player.create_unit('angel'), starting_cells[0])
+	place_unit(player.create_unit('drone'), starting_cells[1])
+	place_unit(player.create_unit('drone'), starting_cells[2])
 
 func _ready():
 	set_process(false)
@@ -145,8 +147,6 @@ func _ready():
 
 	var opponent = get_node('/root/main/game').opponent
 	_set_random_starting_position(opponent)
-
-	highlight_border_cells(player)
 
 	print('MAP READY')
 
@@ -177,31 +177,46 @@ func get_random_neighbor_cells(cell, count):
 				neighbors.remove(pos)
 	return selected
 
-func get_cells_to_place_unit(player):
-	var cells_to_expand = []
-
-	cells_to_expand += player.cells
-
-	for cell in player.cells:
-		for neighbor_cell in get_neighbor_cells(cell):
-			if not neighbor_cell in cells_to_expand:
-				cells_to_expand.append(neighbor_cell)
-
-	return cells_to_expand
-
-func get_border_cells(player):
-	var border_cells = []
+func get_possible_moves(unit):
+	var player = unit.player
+	
+	var possible_moves = []
 	
 	for cell in player.cells:
 		for neighbor_cell in get_neighbor_cells(cell):
-			if not neighbor_cell in border_cells and not neighbor_cell in player.cells and neighbor_cell in nodes:
-				border_cells.append(neighbor_cell)
+			if not neighbor_cell in possible_moves and not neighbor_cell in player.cells and neighbor_cell in nodes:
+				possible_moves.append(neighbor_cell)
+	
+	if unit.flying:
+		var cells_to_fly = []
+		for i in range(unit.steps - 1):
+			var more_cells_to_fly = []
+			for cell in possible_moves + cells_to_fly:
+				for neighbor_cell in get_neighbor_cells(cell):
+					if not neighbor_cell in possible_moves and not neighbor_cell in player.cells:
+						more_cells_to_fly.append(neighbor_cell)
+			cells_to_fly += more_cells_to_fly
+		for cell in cells_to_fly:
+			if cell in nodes:
+				possible_moves.append(cell)
+	else:
+		for i in range(unit.steps - 1):
+			var more_possible_moves = []
+			for cell in possible_moves:
+				for neighbor_cell in get_neighbor_cells(cell):
+					if not neighbor_cell in possible_moves and not neighbor_cell in player.cells and neighbor_cell in nodes:
+						more_possible_moves.append(neighbor_cell)
+			possible_moves += more_possible_moves
 
-	return border_cells
+	return possible_moves
 
-func highlight_border_cells(player):
-	for cell in get_border_cells(player):
+func highlight_possible_moves(unit):
+	for cell in get_possible_moves(unit):
 		nodes[cell].highlight_move_possible()
+
+func clear_possible_moves_highlight():
+	for cell in nodes:
+		nodes[cell].remove_highlight()
 
 func set_process_move():
 	process_move = true
@@ -271,7 +286,7 @@ func place_unit(unit, index):
 	if eggs_placement[player].has(index):
 		return  # cell is already occupied by egg
 
-	if not index in get_cells_to_place_unit(player):
+	if not index in player.cells and not index in get_possible_moves(unit):
 		return  # cell is unreachable
 
 	var current_hex = unit.get_parent()
@@ -295,18 +310,6 @@ func capture_cell(cell, player):
 
 		nodes[cell].get_node('mox').set('visible', true)
 		nodes[cell].get_node('mox').set('texture', player.mox_texture)
-
-func get_random_border_cells(player, count):
-	var border_cells = get_border_cells(player)
-	
-	var selected = []
-
-	while border_cells and selected.size() < count:
-		var pos = randi() % border_cells.size()
-		selected.append(border_cells[pos])
-		border_cells.remove(pos)
-	
-	return selected
 
 func smash_egg(index):
 	var player = posession[index]

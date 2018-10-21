@@ -24,12 +24,13 @@ func make_random_moves():
 		for i in range(defenders):
 			map.place_unit(units[i], contact_cells[randi() % contact_count])
 
-	var border_cells = map.get_border_cells(self)
 	var used_cells = []
-	for i in range(min(border_cells.size(), units.size() - defenders)):
+	for i in range(units.size() - defenders):
+		var unit = units[i + defenders]
+
 		var most_valuable_cell = null
 		var max_income = 0
-		for cell in border_cells:
+		for cell in map.get_possible_moves(unit):
 			if cell in used_cells:
 				continue
 			var income = map.get_cell_income(cell)
@@ -39,7 +40,7 @@ func make_random_moves():
 		
 		if most_valuable_cell:
 			used_cells.append(most_valuable_cell)
-			map.place_unit(units[i + defenders], most_valuable_cell)
+			map.place_unit(unit, most_valuable_cell)
 
 func place_eggs():
 	var map = game.map
