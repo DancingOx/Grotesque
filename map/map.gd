@@ -11,7 +11,7 @@ var y0 = 510
 var a = 256 / 2;
 var h = 55;
 
-var order = 5
+var order = 7
 
 var side = 2 * order - 1;
 

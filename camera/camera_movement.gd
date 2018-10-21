@@ -29,17 +29,22 @@ signal start_move_selection
 func _ready():
 	connect("area_selected", get_parent(), "area_selected", [self])
 	connect("start_move_selection", get_parent(), "start_move_selection", [self])
-
+	
+func set_limits():
+	var tile_map = $'/root/main/game/scene/map/background/TileMap'
+	var map_limits = tile_map.get_used_rect()
+	var map_cellsize = tile_map.cell_size
+	limit_left = map_limits.position.x * map_cellsize.x
+	limit_right = map_limits.end.x * map_cellsize.x
+	limit_top = map_limits.position.y * map_cellsize.y
+	limit_bottom = map_limits.end.y * map_cellsize.y
 
 func _process(delta):
-
 	#smooth movement
-	var inpx = (int(Input.is_action_pressed("ui_right"))
-	                   - int(Input.is_action_pressed("ui_left")))
-	var inpy = (int(Input.is_action_pressed("ui_down"))
-	                   - int(Input.is_action_pressed("ui_up")))
-	position.x = lerp(position.x, position.x + inpx *speed * zoom.x,speed * delta)
-	position.y = lerp(position.y, position.y + inpy *speed * zoom.y,speed * delta)
+	var inpx = (int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")))
+	var inpy = (int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
+	position.x = lerp(position.x, position.x + inpx * speed * zoom.x, speed * delta)
+	position.y = lerp(position.y, position.y + inpy * speed * zoom.y, speed * delta)
 
 	if Input.is_key_pressed(KEY_CONTROL):
 		#check mousepos

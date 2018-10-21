@@ -35,6 +35,8 @@ func _ready():
 	map = map_template.instance()
 	scene.add_child(map)
 	
+	$'scene/camera'.set_limits()
+	
 	print('GAME READY')
 	
 	set_process(true)
