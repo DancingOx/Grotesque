@@ -18,12 +18,6 @@ var units = []
 
 var wealth
 
-var income_table = {
-	'hangar_1': 10,
-	'hangar_2': 20,
-	'hangar_3': 30
-}
-
 const INITIAL_WEALTH = 100
 const UNIT_COST = 300
 
@@ -43,8 +37,7 @@ func create_unit():
 
 func apply_income():
 	for cell in cells:
-		if cell in game.map.bonuses:
-			wealth += income_table[game.map.bonuses[cell]]
+		wealth += game.map.get_cell_income(cell)
 
 func pay_for_new_unit():
 	if wealth < UNIT_COST:

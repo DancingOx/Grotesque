@@ -49,6 +49,12 @@ var bonus_textures = {
 	'hangar_3_green': preload('res://resource/hangar_3_green.png')
 }
 
+var income_table = {
+	'hangar_1': 10,
+	'hangar_2': 20,
+	'hangar_3': 30
+}
+
 func _init_cells():
 	for i in range(side):
 		for j in range(side):
@@ -372,3 +378,8 @@ func get_contact_cells(player):
 	
 	return contact_cells
 
+func get_cell_income(cell):
+	if cell in bonuses:
+		return income_table[bonuses[cell]]
+	else:
+		return 0

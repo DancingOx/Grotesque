@@ -60,6 +60,7 @@ func to_show_phase():
 	for cell in map.nodes:
 		map.nodes[cell].remove_highlight()
 
+	opponent.place_eggs()
 	opponent.make_random_moves()
 
 	for unit in opponent.units:
