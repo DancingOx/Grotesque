@@ -7,8 +7,8 @@ func _ready():
 
 	print('AI player ready')
 
-func create_unit():
-	var unit = .create_unit()
+func create_unit(template_name):
+	var unit = .create_unit(template_name)
 	unit.hide()
 	return unit
 

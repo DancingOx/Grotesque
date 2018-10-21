@@ -130,7 +130,7 @@ func _set_random_starting_position(player):
 
 	for cell in starting_cells:
 		capture_cell(cell, player)
-		var unit = player.create_unit()
+		var unit = player.create_unit('drone')
 		place_unit(unit, cell)
 
 func _ready():
@@ -316,7 +316,7 @@ func smash_egg(index):
 func hatch_egg(index):
 	smash_egg(index)
 	var player = posession[index]
-	var unit = player.create_unit()
+	var unit = player.create_unit('angel')
 	place_unit(unit, index)
 	
 func get_random_free_cell(player):

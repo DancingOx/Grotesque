@@ -3,8 +3,6 @@ extends Control
 onready var game = get_node('/root/main/game')
 onready var gui = get_node('/root/main/canvas/gui')
 
-var drone_template = preload('res://unit/unit.tscn')
-
 var role
 var color
 var color_name
@@ -21,17 +19,22 @@ var wealth
 const INITIAL_WEALTH = 100
 const UNIT_COST = 300
 
+const unit_templates_by_name = {
+	'drone': preload('res://unit/drone.tscn'),
+	'angel': preload('res://unit/angel.tscn')
+}
+
 func _ready():
 	wealth = INITIAL_WEALTH
 
-func create_unit():
-	var unit = drone_template.instance()
+func create_unit(template_name):
+	var unit = unit_templates_by_name[template_name].instance()
 	units.append(unit)
 
 	unit.z_index = 2000
 
 	unit.player = self
-	unit.get_node('sprite').texture = unit.player.units_texture
+	unit.set_texture()
 	
 	return unit
 

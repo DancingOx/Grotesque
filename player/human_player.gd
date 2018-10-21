@@ -9,8 +9,8 @@ func _ready():
 
 	print('Human player ready')
 
-func create_unit():
-	var unit = .create_unit()
+func create_unit(template_name):
+	var unit = .create_unit(template_name)
 	gui.add_unit_icon(unit)
 	return unit
 

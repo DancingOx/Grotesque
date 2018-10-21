@@ -4,10 +4,8 @@ onready var gui = get_node('/root/main/canvas/gui')
 
 var player
 
-const max_hp = 100
+const max_hp = 0
 var hp = max_hp
-
-const attack = 30
 
 func _ready():
 	pass
@@ -33,7 +31,6 @@ func remove():
 	player = null
 		
 	queue_free()
-
 
 var shifted = false
 
