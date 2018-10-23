@@ -317,9 +317,10 @@ func smash_egg(index):
 	eggs_placement[player].erase(index)
 
 func hatch_egg(index):
-	smash_egg(index)
 	var player = posession[index]
-	var unit = player.create_unit('angel')
+	var unit_type = eggs_placement[player][index].unit_type
+	smash_egg(index)
+	var unit = player.create_unit(unit_type)
 	place_unit(unit, index)
 	
 func get_random_free_cell(player):
@@ -360,12 +361,13 @@ func get_random_safe_free_cell(player):
 	
 	return free_cells[randi() % free_cells.size()]
 
-func place_new_egg(index):
+func place_new_egg(index, unit_type):
 	var player = posession[index]
 	if not player:
 		return
 	
 	var new_egg = egg_template.instance()
+	new_egg.unit_type = unit_type
 	new_egg.get_node('Sprite').set('texture', player.egg_texture)
 	nodes[index].add_child(new_egg)
 	eggs_placement[player][index] = new_egg

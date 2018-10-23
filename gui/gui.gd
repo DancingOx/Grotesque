@@ -4,11 +4,22 @@ var unit_icon_template = preload('res://icon_unit/icon_unit.tscn')
 
 onready var game = get_node('/root/main/game')
 
+const unit_production_icon_textures = {
+	'drone': [
+	
+	],
+	'angel': [
+	]
+}
+
 func get_units_panel():
 	return self.get_node('MarginContainer/VBoxContainer/BottomPanel/Left')
 
 func _ready():
-	pass
+	var production_icons_bar = $'MarginContainer/VBoxContainer/BottomPanel/ProductionIcons'
+	var add_unit_icon_scene_template = load('res://icon_add_unit/icon_add_unit.tscn')
+	
+	var unit_types = ['drone', 'angel']
 
 func add_unit_icon(unit):
 	var icon = unit_icon_template.instance()
@@ -54,18 +65,19 @@ func update_wealth_indicator(wealth):
 var egg = null
 var egg_hex = null
 
-func activate_egg_placing_mode():
-	if not game.human.pay_for_new_unit():
+func activate_egg_placing_mode(unit_type):
+	if not game.human.pay_for_new_unit(unit_type):
 		return
 	
 	enable_unit_selection(false)
 	egg = load('res://egg/egg.tscn').instance()
+	egg.unit_type = unit_type
 	
 	return true
 
 func deactivate_egg_placing_mode():
 	if egg:
-		game.human.return_new_unit_payment()
+		game.human.return_new_unit_payment(egg.unit_type)
 
 		egg.queue_free()
 		egg = null
@@ -93,8 +105,8 @@ func place_egg(hex):
 		move_egg(hex)
 
 	game.map.eggs_placement[hex.player][hex.index] = egg
-
-	$'MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/AddUnitIcon/Button'.set('pressed', false)
+	for icon in $'MarginContainer/VBoxContainer/BottomPanel/ProductionIcons'.get_children():
+		icon.get_node('Button').set('pressed', false)
 
 	egg = null
 	egg_hex = null

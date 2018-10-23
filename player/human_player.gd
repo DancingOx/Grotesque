@@ -19,13 +19,13 @@ func apply_income():
 
 	gui.update_wealth_indicator(wealth)
 
-func pay_for_new_unit():
-	if .pay_for_new_unit():
+func pay_for_new_unit(unit_type):
+	if .pay_for_new_unit(unit_type):
 		gui.update_wealth_indicator(wealth)
 		return true
 	else:
 		return false
 
-func return_new_unit_payment():
-	.return_new_unit_payment()
+func return_new_unit_payment(unit_type):
+	.return_new_unit_payment(unit_type)
 	gui.update_wealth_indicator(wealth)

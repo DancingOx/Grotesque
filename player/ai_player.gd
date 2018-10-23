@@ -52,7 +52,10 @@ func place_eggs():
 		if cell == null:
 			break  # all posessed cells are occupied
 		
-		if not pay_for_new_unit():
-			break  # no enouth wealth
+		var unit_type = 'angel'
+		if not pay_for_new_unit(unit_type):
+			unit_type = 'drone'
+			if not pay_for_new_unit(unit_type):
+				break  # no enouth wealth
 
-		map.place_new_egg(cell)
+		map.place_new_egg(cell, unit_type)
