@@ -83,7 +83,8 @@ func deactivate_egg_placing_mode():
 		egg = null
 		egg_hex = null
 
-	$'MarginContainer/VBoxContainer/BottomPanel/HBoxContainer/AddUnitIcon/Button'.set('pressed', false)
+	for icon in $'MarginContainer/VBoxContainer/BottomPanel/ProductionIcons'.get_children():
+		icon.get_node('Button').set('pressed', false)
 
 	enable_unit_selection(true)
 
