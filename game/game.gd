@@ -90,7 +90,10 @@ func to_plan_phase():
 
 				unit1.hp -= unit2.attack
 				unit2.hp -= unit1.attack
-				
+
+				unit1.take_damage()
+				unit2.take_damage()
+
 				if unit1.hp <= 0:
 					unit1.remove()
 					map.units_placement[human].erase(cell1)

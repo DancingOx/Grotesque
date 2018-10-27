@@ -2,13 +2,18 @@ extends Area2D
 
 onready var gui = get_node('/root/main/canvas/gui')
 
+var floating_indication_template = preload('res://floating_indication/indicator.tscn')
+
 var player
 
 const max_hp = 0
 var hp = max_hp
 
+var indicator
+
 func _ready():
-	pass
+	indicator = floating_indication_template.instance()
+	self.add_child(indicator)
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -55,3 +60,9 @@ func shift_back():
 		self.position.x += 20
 	
 	shifted = false
+
+func take_damage():
+	print('take_damage', indicator)
+	indicator.play_animation()
+	
+	
