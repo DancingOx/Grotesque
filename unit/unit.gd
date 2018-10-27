@@ -61,8 +61,8 @@ func shift_back():
 	
 	shifted = false
 
-func take_damage():
-	print('take_damage', indicator)
+func take_damage(damage):
+	indicator.get_node('Text').text = str(damage)
 	indicator.play_animation()
 	
 	

@@ -14,6 +14,8 @@ var opponent
 var turn = 1
 var phase = 0
 
+var players = []
+
 func _ready():
 	human = human_player_template.instance()
 	human.color = Color(0.0, 0.9, 0.9, 0.9)
@@ -21,6 +23,7 @@ func _ready():
 	human.units_texture = load('res://resource/angel_blue.png')
 	human.egg_texture = preload('res://resource/egg.png')
 	human.mox_texture = preload('res://resource/mox_blue.png')
+	players.append(human)
 	self.add_child(human)
 
 	opponent = ai_player_template.instance()
@@ -29,6 +32,7 @@ func _ready():
 	opponent.units_texture = load('res://resource/angel_green.png')
 	opponent.egg_texture = preload('res://resource/egg_green.png')
 	opponent.mox_texture = preload('res://resource/mox_green.png')
+	players.append(opponent)
 	self.add_child(opponent)
 
 	var scene = get_node("/root/main/game/scene")
@@ -70,8 +74,10 @@ func to_show_phase():
 
 	shift_units()
 
-func to_plan_phase():
 	damage_units()
+
+func to_plan_phase():
+	perish_units()
 
 	$'/root/main/canvas/gui'.refresh_lifebars()
 		
@@ -96,19 +102,21 @@ func damage_units():
 				var unit1 = map.units_placement[human][cell1]
 				var unit2 = map.units_placement[opponent][cell2]
 
-				unit1.hp -= unit2.attack
-				unit2.hp -= unit1.attack
+				var damage1 = unit2.attack
+				unit1.hp -= damage1
+				unit1.take_damage(damage1)
 
-				unit1.take_damage()
-				unit2.take_damage()
+				var damage2 = unit1.attack
+				unit2.hp -= damage2
+				unit2.take_damage(damage2)
 
-				if unit1.hp <= 0:
-					unit1.remove()
-					map.units_placement[human].erase(cell1)
-
-				if unit2.hp <= 0:
-					unit2.remove()
-					map.units_placement[opponent].erase(cell2)
+func perish_units():
+	for player in players:
+		for cell in map.units_placement[player]:
+			var unit = map.units_placement[player][cell]
+			if unit.hp <= 0:
+				unit.remove()
+				map.units_placement[player].erase(cell)
 
 func damage_and_hatch_eggs():
 	for egg_cell in map.eggs_placement[human].keys():
