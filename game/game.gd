@@ -59,29 +59,37 @@ func next_phase():
 		phase = 0
 	
 func to_show_phase():
-	map.clear_possible_moves_highlight()
-
 	opponent.place_eggs()
 	opponent.make_random_moves()
-
-	for unit in opponent.units:
-		unit.show()
-
+	
 	$'/root/main/canvas/gui'.unselect_all_units()
+	set_units_pickable(false)
+	map.clear_possible_moves_highlight()
 
-	set_units_unpickable(false)
+	show_enemy_units()
 
-	for cell1 in map.units_placement[human]:
-		for cell2 in map.units_placement[opponent]:
-			if cell1 == cell2:
-				var unit1 = map.units_placement[human][cell1]
-				var unit2 = map.units_placement[opponent][cell2]
-
-				unit1.shift()
-				unit2.shift()
+	shift_units()
 
 func to_plan_phase():
-	# battle
+	damage_units()
+
+	$'/root/main/canvas/gui'.refresh_lifebars()
+		
+	damage_and_hatch_eggs()
+
+	apply_income()
+
+	hide_enemy_units()
+
+	capture_cells()
+
+	set_units_pickable(true)
+	
+	increment_turn()
+
+	shift_units_back()
+
+func damage_units():
 	for cell1 in map.units_placement[human]:
 		for cell2 in map.units_placement[opponent]:
 			if cell1 == cell2:
@@ -102,8 +110,7 @@ func to_plan_phase():
 					unit2.remove()
 					map.units_placement[opponent].erase(cell2)
 
-	$'/root/main/canvas/gui'.refresh_lifebars()
-
+func damage_and_hatch_eggs():
 	for egg_cell in map.eggs_placement[human].keys():
 		var broken = false
 		for unit_cell in map.units_placement[opponent]:
@@ -124,12 +131,19 @@ func to_plan_phase():
 		if not broken:
 			map.hatch_egg(egg_cell)
 
+func show_enemy_units():
+	for unit in opponent.units:
+		unit.show()
+
+func hide_enemy_units():
 	for unit in opponent.units:
 		unit.hide()
 
+func apply_income():
 	human.apply_income()
 	opponent.apply_income()
 
+func capture_cells():
 	for player in map.units_placement:
 		for cell in map.units_placement[player]:
 			var the_only_one = true
@@ -142,21 +156,27 @@ func to_plan_phase():
 			if the_only_one:
 				map.capture_cell(cell, player)
 
-	var unit = get_current_unit()
-	if unit:
-		map.highlight_possible_moves(unit)
-
-	set_units_unpickable(true)
-	
+func increment_turn():
 	turn += 1
 	get_node('/root/main/canvas/gui/MarginContainer/VBoxContainer/TopPanel/Right/Turn').text = 'Turn %s' % turn
 
+func shift_units():
+	for cell1 in map.units_placement[human]:
+		for cell2 in map.units_placement[opponent]:
+			if cell1 == cell2:
+				var unit1 = map.units_placement[human][cell1]
+				var unit2 = map.units_placement[opponent][cell2]
+
+				unit1.shift()
+				unit2.shift()
+
+func shift_units_back():
 	for unit in human.units:
 		unit.shift_back()
 	for unit in opponent.units:
 		unit.shift_back()
 
-func set_units_unpickable(value):
+func set_units_pickable(value):
 	for unit in human.units:
 		unit.input_pickable = value
 	for unit in opponent.units:
